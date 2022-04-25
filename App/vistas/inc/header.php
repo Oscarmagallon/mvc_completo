@@ -28,6 +28,8 @@
                             <a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL ?>/usuarios">Carreras</a>
                         <?php else: ?>
                             <a class="nav-link" aria-current="page" href="<?php echo RUTA_URL ?>/Carreras">Carreras</a>
+                            <a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL ?>/Entrenamientos">Entrenamientos</a>
+
                         <?php endif ?>
                     </li>
 <?php endif ?>

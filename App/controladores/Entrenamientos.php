@@ -1,5 +1,5 @@
 <?php
-class Carreras extends Controlador{
+class Entrenamientos extends Controlador{
 
     public function __construct(){
         Sesion::iniciarSesion($this->datos);
@@ -11,19 +11,18 @@ class Carreras extends Controlador{
         }
 
 
-        $this->CarreraModelo = $this->modelo('CarreraModelo');
+        $this->EntrenamietoModelo = $this->modelo('EntrenamientoModelo');
         
     }
 
 
     public function index(){
-        echo "hola";
-        $this->datos['Carreras'] = $this->CarreraModelo->obtenerCarreras();
-        $this->vista('Carreras/inicio',$this->datos);
+        $this->datos['Entrenamientos'] = $this->EntrenamietoModelo->obtenerEntrenamientos();
+        $this->vista('Entrenamientos/inicio',$this->datos);
      
     }
 
-    public function crear (){
+    public function crear(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                
             echo "hola";
