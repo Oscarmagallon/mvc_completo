@@ -125,9 +125,10 @@ print_r($datos["Carreras"]);
     //});
     
     </script>
-<script src="index.js"></script>
+
     
    
 <?php
 require_once RUTA_APP.'/vistas/inc/footer.php';
 ?>
+<script src="index.js"></script>
