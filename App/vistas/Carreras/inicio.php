@@ -4,7 +4,7 @@ require_once RUTA_APP.'/vistas/inc/header.php';
 
 print_r($datos["Carreras"]);
 ?>
-<script src="app.js"></script>
+
 <html>
 <div>
 </nav>
@@ -25,8 +25,7 @@ print_r($datos["Carreras"]);
         </button>
       </div>
       <div class="modal-body">
-        <form action="post" id="crear">
-       <script>event.preventDefault();</script> 
+        <form action="post" @submit.prevent="addEntrenamiento()" id="crearCarreras">
           <label for="fecha">Fecha</label>
           <input type="date" id="fecha">
           <button type="submit" class="button"><?php echo RUTA_URL ?></button>
@@ -35,14 +34,13 @@ print_r($datos["Carreras"]);
       </div>
       <div class="modal-footer">
         
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" form="crear">Save changes</button>
-      </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Agregar</button>
+        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      </div>
     </div>
   </div>
 </div>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover" id="tablePersonas">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th> 
@@ -110,7 +108,26 @@ print_r($datos["Carreras"]);
 				}
 			}
 		}
+    
+    //$('#crearCarreras').submit(function(e){
+      //e.preventDefault();
+      //f/echa = $.trim($('#fecha').val());
+      //$.ajax({
+       // url:"/controladores/Carreras.php",
+        //type: "POST",
+        //dataType: "json",
+        //data:{fecha:fecha},
+        //success: function(data){
+         // var datos = JSON.parse(data);
+          //fecha = datos[0].fecha;
+        //}   
+      //});
+    //});
+    
     </script>
+<script src="index.js"></script>
+    
+   
 <?php
 require_once RUTA_APP.'/vistas/inc/footer.php';
 ?>
