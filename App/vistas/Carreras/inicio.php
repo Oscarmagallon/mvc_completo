@@ -3,8 +3,9 @@ require_once RUTA_APP.'/vistas/inc/header.php';
 
 
 print_r($datos["Carreras"]);
+json_encode($datos); 
 ?>
-
+<br><br><br>
 <html>
 <div>
 </nav>
@@ -122,8 +123,9 @@ print_r($datos["Carreras"]);
         //carreras = data;
       })
    }
-  
-    
+   var datos = <?php echo json_encode($datos);?>;
+   console.log(datos);
+ 
     </script>
 
     
