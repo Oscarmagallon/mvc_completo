@@ -1,9 +1,8 @@
+
+<html>
 <?php 
 require_once RUTA_APP.'/vistas/inc/header.php';
 ?>
-<br>
-<br>
-<html>
 <div>
 </nav>
     <div class="container-fluid px-2">
@@ -44,7 +43,8 @@ require_once RUTA_APP.'/vistas/inc/header.php';
                     </tr>
                 <?php endforeach ?>
             </tbody>
+           <?php require_once RUTA_APP.'/vistas/inc/footer.php'; ?> 
     </html>
 <?php
-require_once RUTA_APP.'/vistas/inc/footer.php';
+
 ?>

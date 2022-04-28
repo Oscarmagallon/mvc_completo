@@ -25,7 +25,7 @@ print_r($datos["Carreras"]);
         </button>
       </div>
       <div class="modal-body">
-        <form action="post" @submit.prevent="addEntrenamiento()" id="crearCarreras">
+        <form action="Carreras/crear" method="POST">
           <label for="fecha">Fecha</label>
           <input type="date" id="fecha">
           <button type="submit" class="button"><?php echo RUTA_URL ?></button>
@@ -109,20 +109,20 @@ print_r($datos["Carreras"]);
 			}
 		}
     
-    //$('#crearCarreras').submit(function(e){
-      //e.preventDefault();
-      //f/echa = $.trim($('#fecha').val());
-      //$.ajax({
-       // url:"/controladores/Carreras.php",
-        //type: "POST",
-        //dataType: "json",
-        //data:{fecha:fecha},
-        //success: function(data){
-         // var datos = JSON.parse(data);
-          //fecha = datos[0].fecha;
-        //}   
-      //});
-    //});
+   function getCarreras(){
+    fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data)
+        //carreras = data;
+      })
+   }
+  
     
     </script>
 
@@ -131,4 +131,4 @@ print_r($datos["Carreras"]);
 <?php
 require_once RUTA_APP.'/vistas/inc/footer.php';
 ?>
-<script src="index.js"></script>
+

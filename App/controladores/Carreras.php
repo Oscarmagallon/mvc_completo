@@ -23,13 +23,13 @@ class Carreras extends Controlador{
      
     }
 
-    public function crear (){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-               
-            echo "hola";
-        } else {
-           
-        }
+    public function obtenerCarreras(){
+        $datos = "hola";
+        $this->vistaApi($this->datos);
+    }
+
+    public function crear(){
+            echo "dentro crear";
     }
 }
 ?>
