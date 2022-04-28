@@ -20,7 +20,7 @@ json_encode($datos);
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Añadir Carrera</h5>
+         <h5 class="modal-title">Añadir Carrera</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -40,39 +40,10 @@ json_encode($datos);
     </div>
   </div>
 </div>
-    <div class="table-responsive">
-        <table class="table table-hover" id="tablePersonas">
-            <thead>
-                <tr>
-                    <th scope="col">Nombre</th> 
-                    <th scope="col">Metros</th>
-                    <th scope="col">Tiempo</th>
-                    <th scope="col">Ritmo</th>
-                    <th scope="col">Superficie</th>
-                    <th scope="col">Acciones</th>
+    <div class="table-responsive" id="divTabla">
+        <table class="table table-hover" id="tabla">
 
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($datos['Carreras'] as $t): ?>
-                    <tr>
-                        <td><?php echo $t->Titulo ?></td>
-                        <td><?php echo $t->Metros ?></td>
-                        <td><?php echo $t->Tiempo ?></td>
-                        <td><?php echo "Tiempo"?></td>
-                        <td><?php echo $t->Tipo?></td>
-
-                        <td class="col-1 text-center">
-                            <a title="Modificar"
-                                href="<?php echo RUTA_URL?>/Temporadas/editar/<?php echo $t->temp_nombre ?>"><i
-                                    class="bi bi-pencil-square"></i></a>
-                            <a title="Eliminar" href="<?php echo RUTA_URL?>/Temporadas/borrar/<?php echo $t->temp_nombre?>"><i
-                                    class="bi bi-x-lg"></i></a>
-
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
+            
     </html>
     <script>
      
@@ -124,8 +95,35 @@ json_encode($datos);
       })
    }
    var datos = <?php echo json_encode($datos);?>;
-   console.log(datos);
- 
+   var tabla = document.getElementById("tabla");
+   tabla.innerHTML = "";
+   let thead = document.createElement("thead");
+   let th = document.createElement("th");
+   let th1 = document.createElement("th");
+   let th2 = document.createElement("th");
+   let th3 = document.createElement("th");
+   let th4 = document.createElement("th");
+   let th5 = document.createElement("th");
+   th.appendChild(document.createTextNode("Nombre"));
+   th1.appendChild(document.createTextNode("Metros"));
+   th2.appendChild(document.createTextNode("Tiempo"));
+   th3.appendChild(document.createTextNode("Ritmo"));
+   th4.appendChild(document.createTextNode("Superficie"));
+   th5.appendChild(document.createTextNode("Acciones"));
+
+   thead.appendChild(th);
+   thead.appendChild(th1);
+   thead.appendChild(th2);
+   thead.appendChild(th3);
+   thead.appendChild(th4);
+   thead.appendChild(th5);
+   
+   tabla.appendChild(thead);
+   let tbody = document.createElement("tbody");
+   datos["Carreras"].forEach((value) => {
+          console.log(value=>titulo);
+    });
+   console.log(datos["Carreras"][0]["Titulo"])
     </script>
 
     
