@@ -17,8 +17,8 @@ class Carreras extends Controlador{
 
 
     public function index(){
-        echo "hola";
         $this->datos['Carreras'] = $this->CarreraModelo->obtenerCarreras();
+        $this->datos['Usuarios'] = $this->CarreraModelo->obtenerUsuarios();
         $this->vista('Carreras/inicio',$this->datos);
      
     }
@@ -27,9 +27,23 @@ class Carreras extends Controlador{
         $datos = "hola";
         $this->vistaApi($this->datos);
     }
-
     public function crear(){
-            echo "dentro crear";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $fecha = ($_POST["fecha"]);
+      
+             $usuarioNuevo = [
+            'Fecha' => trim($_POST["fecha"]),
+            'Titulo' => trim($_POST["titulo"]),
+            'Tiempo' => trim($_POST["tiempo"]),
+            'superficie' => trim($_POST['superficie']),
+            'Metros' => trim($_POST['metros']),
+            'CodUser' => trim($_POST['usuarios'])
+        ];
+
+        $this->CarreraModelo->agregarCarrera($usuarioNuevo);
+        redireccionar("/Carreras");
+
     }
+}
 }
 ?>

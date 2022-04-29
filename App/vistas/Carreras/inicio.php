@@ -1,17 +1,16 @@
 <?php 
 require_once RUTA_APP.'/vistas/inc/header.php';
-
-
-print_r($datos["Carreras"]);
 json_encode($datos); 
 ?>
-<br><br><br>
+
 <html>
 <div>
 </nav>
     <div class="container-fluid px-2">
+
                 <ul class="navbar-nav">
                     <li>
+                    <br> <br><br> <br> <br>
                         <button class="btn btn-primary" id="btnModal">Crear Temporada</button></a>
                     </li>
                 </ul>
@@ -28,16 +27,35 @@ json_encode($datos);
       <div class="modal-body">
         <form action="Carreras/crear" method="POST">
           <label for="fecha">Fecha</label>
-          <input type="date" id="fecha">
-          <button type="submit" class="button"><?php echo RUTA_URL ?></button>
+          <input type="date"name="fecha" id="fecha">
+          <label for="Titulo">Titulo</label>
+          <input type="text" name="titulo" id="titulo">
+          <p>Superficie</p>
+            <input type="radio" id="Cross" name ="superficie" value="1">
+            <label for="Cross">Cross</label>
+            <input type="radio" id="Tierra" name ="superficie" value="2">
+            <label for="Tierra">Tierra</label>
+            <input type="radio" id="Pista" name ="superficie"  value="3">
+            <label for="Pista">Pista</label> <br>
+          <input type="number" value ="" name="metros"> &nbsp;
+          <input type="time" id="tiempo" name="tiempo">
+          <select name="usuarios" id="usuarios">
+              <?php 
+                foreach ($datos["Usuarios"] as $u):
+              ?>
+              <option value="<?php echo $u->idUsuario ?>"><?php echo $u->Nombre ?></option>
+                <?php endforeach; ?>
+          </select>
 
-        </form>
+
+        
       </div>
       <div class="modal-footer">
         
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Agregar</button>
+      <button type="submit" class="button">Agregar</button>
         <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      </div>
     </div>
+</form>
   </div>
 </div>
     <div class="table-responsive" id="divTabla">
@@ -120,10 +138,33 @@ json_encode($datos);
    
    tabla.appendChild(thead);
    let tbody = document.createElement("tbody");
-   datos["Carreras"].forEach((value) => {
-          console.log(value=>titulo);
-    });
-   console.log(datos["Carreras"][0]["Titulo"])
+  
+    for (let i = 0; i <= datos["Carreras"].length; i++) {
+      
+      let tr = document.createElement("tr");
+      let td = document.createElement("td");
+      let td1 = document.createElement("td");
+      let td2 = document.createElement("td");
+      let td3 = document.createElement("td");
+      let td4 = document.createElement("td");
+      let td5 = document.createElement("td");
+      td.appendChild(document.createTextNode(datos["Carreras"][i]['Titulo']));
+      td1.appendChild(document.createTextNode(datos["Carreras"][i]['Metros']));
+      td2.appendChild(document.createTextNode(datos["Carreras"][i]['Tiempo']));
+      td3.appendChild(document.createTextNode("Ritmo"));
+      td4.appendChild(document.createTextNode(datos["Carreras"][i]['Tipo']));
+      td5.appendChild(document.createTextNode("Acciones"));
+      tr.appendChild(td);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+      tr.appendChild(td5);
+      tbody.appendChild(tr);
+      tabla.appendChild(tbody);
+
+    }
+
     </script>
 
     
