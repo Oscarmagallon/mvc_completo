@@ -11,16 +11,16 @@ class Entrenamientos extends Controlador{
         }
 
 
-        $this->EntrenamietoModelo = $this->modelo('EntrenamientoModelo');
+        $this->EntrenamientoModelo = $this->modelo('EntrenamientoModelo');
         
     }
 
 
     public function index(){
-        $this->datos['Entrenamientos'] = $this->EntrenamietoModelo->obtenerEntrenamientos();
-        $this->datos['Usuarios'] = $this->EntrenamietoModelo->obtenerUsuarios();
-        $this->datos['Entrenadores'] = $this->EntrenamietoModelo->obtenerEntrenadores();
-        $this->datos['Tipo_entreno'] = $this->EntrenamietoModelo->obtenerTipos();
+        $this->datos['Entrenamientos'] = $this->EntrenamientoModelo->obtenerEntrenamientos();
+        $this->datos['Usuarios'] = $this->EntrenamientoModelo->obtenerUsuarios();
+        $this->datos['Entrenadores'] = $this->EntrenamientoModelo->obtenerEntrenadores();
+        $this->datos['Tipo_entreno'] = $this->EntrenamientoModelo->obtenerTipos();
 
         $this->vista('Entrenamientos/inicio',$this->datos);
      
@@ -40,10 +40,8 @@ class Entrenamientos extends Controlador{
                 'CodEntre' => trim($_POST['entrenador']),
 
             ];
-
-         
-            print_r(($usuarioNuevo));
-            //redireccionar("/Carreras");
+            $this->EntrenamientoModelo->agregarEntrenamientos($usuarioNuevo); 
+            redireccionar("/Entrenamientos");
     
         }
     }

@@ -21,14 +21,17 @@
         return $this->db->registros();
 
     }
-    public function agregarEntrenamiento($datos) {
+    public function agregarEntrenamientos($datos) {
         print_r($datos);
-        $this->db->query("INSERT into entrenamiento Values (null,:vuelta, :titulo, :Metros, :Tipo_entre, :superficie, :usuario, :entrenador)");
+        $this->db->query("INSERT into entrenamiento Values (null,:vuelta, :titulo, :tiempo, :metros, :Tipo_entre, :superficie, :usuario, :entrenador,:fecha)");
+        $this->db->bind(':vuelta',$datos['Vueltas']);
         $this->db->bind(':titulo',$datos['Titulo']);
-        $this->db->bind(':metros',$datos['Metros']);
         $this->db->bind(':tiempo',$datos['Tiempo']);
+        $this->db->bind(':metros',$datos['Metros']);
+        $this->db->bind(':Tipo_entre',$datos['Tipo']);
         $this->db->bind(':superficie',$datos['superficie']);
         $this->db->bind(':usuario',$datos['CodUser']);
+        $this->db->bind(':entrenador',$datos['CodEntre']);
         $this->db->bind(':fecha',$datos['Fecha']);
 
 
