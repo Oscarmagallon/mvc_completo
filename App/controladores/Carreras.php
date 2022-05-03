@@ -28,9 +28,7 @@ class Carreras extends Controlador{
         $this->vistaApi($this->datos);
     }
     public function crear(){
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $fecha = ($_POST["fecha"]);
-      
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {      
              $usuarioNuevo = [
             'Fecha' => trim($_POST["fecha"]),
             'Titulo' => trim($_POST["titulo"]),
