@@ -27,23 +27,25 @@ json_encode($datos);
         </button>
       </div>
       <div class="modal-body">
-        <form action="Entrenamientos/crear" method="POST">
-          <label for="fecha">Fecha</label>
+        <form action="/crear" method="POST">
+          <label for="fecha">Fecha</label> <br>
           <input type="date" name="fecha" value="" id="fecha">
           <label for="vueltas">vueltas</label>
           <input type="number" value ="" name="vueltas"> 
           <label for="Titulo">Titulo</label>
           <input type="text" name="titulo" id="titulo">
-          <p>Superficie</p>
-            <input type="radio" id="Cross" name ="superficie" value="1">
-            <label for="Cross">Cross</label>
-            <input type="radio" id="Tierra" name ="superficie" value="2">
-            <label for="Tierra">Tierra</label>
-            <input type="radio" id="Pista" name ="superficie"  value="3">
-            <label for="Pista">Pista</label> <br>
-          <input type="number" value ="" name="metros"> &nbsp;
           <label for="tiempo">Tiempo</label>
           <input type="time" id="tiempo" name="tiempo">
+          <p>Superficie</p>
+            <?php foreach ($datos['Superficie'] as $s): ?>
+                <label for="<?php echo $s->Tipo ?>"><?php echo $s->Tipo ?></label>
+
+                <input type="radio" id="<?php echo $s->Tipo ?>" name ="superficie" value="<?php echo $s->Cod ?>">
+            <?php endforeach ?>
+            <br>
+          <label for="Metros">Metros </label>
+          <input type="number" value ="" name="metros"> <br>
+          
           <label for="Tipo">Tipo Entrenamiento</label>
           <select name="Tipo" id="Tipo">
               <?php 
@@ -52,6 +54,7 @@ json_encode($datos);
               <option value="<?php echo $u->Cod ?>"><?php echo $u->Tipo_entrenamiento ?></option>
                 <?php endforeach; ?>
           </select>
+          &nbsp;  &nbsp;  &nbsp;  &nbsp;
           <label for="usuarios">Atleta</label>
           <select name="usuarios" id="usuarios">
               <?php 
@@ -60,6 +63,7 @@ json_encode($datos);
               <option value="<?php echo $u->idUsuario ?>"><?php echo $u->Nombre ?></option>
                 <?php endforeach; ?>
           </select>
+          <br>
           <label for="entrenador">Entrenador</label>
           <select name="entrenador" id="entrenador">
               <?php 
@@ -180,6 +184,7 @@ json_encode($datos);
       let td5 = document.createElement("td");
       let td6 = document.createElement("td");
       let td7 = document.createElement("td");
+      let button = document.createElement("button");
 
       td.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Titulo']));
       td1.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Vuelta']));
@@ -188,7 +193,17 @@ json_encode($datos);
       td4.appendChild(document.createTextNode("Ritmo"));
       td5.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tipo']));
       td6.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tipo_entrenamiento']));
-      td7.appendChild(document.createTextNode("Acciones"));
+      button.appendChild(document.createTextNode("X"));
+      document.addEventListener("click", function(){
+           confirm('¿Realmente desea eliminar?');
+           if(confirm()){
+            window.location.href = "/mvc_completo/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
+           }
+
+});
+      //a.href="<?//php echo RUTA_URL?>/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
+      
+      td7.appendChild(button);
       tr.appendChild(td);
       tr.appendChild(td1);
       tr.appendChild(td2);
@@ -201,7 +216,7 @@ json_encode($datos);
       tabla.appendChild(tbody);
 
     }
-   
+  
     </script>
 
     

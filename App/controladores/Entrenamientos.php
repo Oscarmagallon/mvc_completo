@@ -21,6 +21,7 @@ class Entrenamientos extends Controlador{
         $this->datos['Usuarios'] = $this->EntrenamientoModelo->obtenerUsuarios();
         $this->datos['Entrenadores'] = $this->EntrenamientoModelo->obtenerEntrenadores();
         $this->datos['Tipo_entreno'] = $this->EntrenamientoModelo->obtenerTipos();
+        $this->datos['Superficie'] = $this->EntrenamientoModelo->obtenerSuperficies();
 
         $this->vista('Entrenamientos/inicio',$this->datos);
      
@@ -44,6 +45,11 @@ class Entrenamientos extends Controlador{
             redireccionar("/Entrenamientos");
     
         }
+    }
+
+    public function borrar(){
+       echo "Hola";        
+
     }
 }
 ?>

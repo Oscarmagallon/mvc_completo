@@ -5,12 +5,17 @@
     public function __construct(){
         $this->db = new Base;
     }
+    public function obtenerSuperficies(){
+        $this->db->query("SELECT * FROM superficie;");
+        return $this->db->registros();
+    }
 
 
     public function obtenerEntrenamientos(){
-        $this->db->query("SELECT * FROM entrenamiento INNER JOIN superficie on entrenamiento.superficie_Cod = superficie.Cod INNER JOIN tipo_entrenamiento on entrenamiento.Tipo_entrenamiento_Cod = tipo_entrenamiento.Cod;");
+        $this->db->query("SELECT e.*,s.Cod as Cod_superficie,s.Tipo,t.Tipo_entrenamiento,t.Cod as Cod_tipo FROM entrenamiento e INNER JOIN superficie s on e.superficie_Cod = s.Cod INNER JOIN tipo_entrenamiento t on e.Tipo_entrenamiento_Cod = t.Cod;");
         return $this->db->registros();
     }
+    
     public function obtenerUsuarios(){
         $this->db->query("SELECT * FROM atleta INNER JOIN usuario on atleta.idUsuario = usuario.idUsuario;");
         return $this->db->registros();
