@@ -47,8 +47,9 @@ class Entrenamientos extends Controlador{
         }
     }
 
-    public function borrar(){
-       echo "Hola";        
+    public function borrar($id){
+        $this->EntrenamientoModelo->eliminar($id); 
+        redireccionar("/Entrenamientos");
 
     }
 }

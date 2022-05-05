@@ -112,7 +112,8 @@ json_encode($datos);
         //carreras = data;
       })
    }
-   var datos = <?php echo json_encode($datos);?>;
+   function pintarTabla(){
+    var datos = <?php echo json_encode($datos);?>;
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
    let thead = document.createElement("thead");
@@ -148,12 +149,21 @@ json_encode($datos);
       let td3 = document.createElement("td");
       let td4 = document.createElement("td");
       let td5 = document.createElement("td");
+      let button = document.createElement("button");
+
       td.appendChild(document.createTextNode(datos["Carreras"][i]['Titulo']));
       td1.appendChild(document.createTextNode(datos["Carreras"][i]['Metros']));
       td2.appendChild(document.createTextNode(datos["Carreras"][i]['Tiempo']));
       td3.appendChild(document.createTextNode("Ritmo"));
       td4.appendChild(document.createTextNode(datos["Carreras"][i]['Tipo']));
-      td5.appendChild(document.createTextNode("Acciones"));
+      button.appendChild(document.createTextNode("X"));
+      button.addEventListener("click", function(){
+           resultado = confirm('¿Realmente desea eliminar?');
+           if(resultado){
+            window.location.href = "/mvc_completo/Carreras/borrar/"+datos["Carreras"][i]['Cod'];
+           }
+      });
+      td5.appendChild(button);  
       tr.appendChild(td);
       tr.appendChild(td1);
       tr.appendChild(td2);
@@ -163,7 +173,11 @@ json_encode($datos);
       tbody.appendChild(tr);
       tabla.appendChild(tbody);
 
-    }
+    
+   }
+   }
+   window.onload = pintarTabla(); 
+
 
     </script>
 

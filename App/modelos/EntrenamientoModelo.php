@@ -27,7 +27,7 @@
 
     }
     public function agregarEntrenamientos($datos) {
-        print_r($datos);
+    
         $this->db->query("INSERT into entrenamiento Values (null,:vuelta, :titulo, :tiempo, :metros, :Tipo_entre, :superficie, :usuario, :entrenador,:fecha)");
         $this->db->bind(':vuelta',$datos['Vueltas']);
         $this->db->bind(':titulo',$datos['Titulo']);
@@ -48,6 +48,13 @@
         return $this->db->registros();
 
 
+    }
+
+    public function eliminar($id){
+        
+        $this->db->query("DELETE from entrenamiento where Cod = $id");
+        $this->db->execute();
+       
     }
 
  }

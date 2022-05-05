@@ -27,7 +27,7 @@ json_encode($datos);
         </button>
       </div>
       <div class="modal-body">
-        <form action="/crear" method="POST">
+        <form action="Entrenamientos/crear" method="POST">
           <label for="fecha">Fecha</label> <br>
           <input type="date" name="fecha" value="" id="fecha">
           <label for="vueltas">vueltas</label>
@@ -72,21 +72,20 @@ json_encode($datos);
               <option value="<?php echo $u->idUsuario ?>"><?php echo $u->Nombre ?></option>
                 <?php endforeach; ?>
           </select>
-
-
         
       </div>
       <div class="modal-footer">
         
       <button type="submit" class="button">Agregar</button>
-        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      </div>
+        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      
+      </div>
     </div>
 </form>
   </div>
 </div>
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
-<?php print_r($datos["Entrenamientos"]) ?>
+
             
     </html>
     <script>
@@ -138,7 +137,8 @@ json_encode($datos);
         //carreras = data;
       })
    }
-   var datos = <?php echo json_encode($datos);?>;
+   function pintarTabla(){
+    var datos = <?php echo json_encode($datos);?>;
    console.log(datos["Entrenamientos"][0]['Titulo']);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
@@ -194,9 +194,9 @@ json_encode($datos);
       td5.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tipo']));
       td6.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tipo_entrenamiento']));
       button.appendChild(document.createTextNode("X"));
-      document.addEventListener("click", function(){
-           confirm('¿Realmente desea eliminar?');
-           if(confirm()){
+      button.addEventListener("click", function(){
+           resultado = confirm('¿Realmente desea eliminar?');
+           if(resultado){
             window.location.href = "/mvc_completo/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
            }
 
@@ -215,7 +215,14 @@ json_encode($datos);
       tbody.appendChild(tr);
       tabla.appendChild(tbody);
 
-    }
+
+   }
+   }
+
+   window.onload = pintarTabla(); 
+      
+    
+    
   
     </script>
 
