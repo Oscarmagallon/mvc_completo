@@ -83,10 +83,21 @@ json_encode($datos);
 </form>
   </div>
 </div>
+
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Filtrar por
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="" onclick="filtrarEntrenamientos(1)">Suave</a></li>
+                <li><a class="dropdown-item" href="" onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
+              </ul>
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
 
-            
+            <?php
+              print_r($datos["Entrenamientos"]);
+            ?>
     </html>
     <script>
      
@@ -123,6 +134,83 @@ json_encode($datos);
 				}
 			}
 		}
+
+    function filtrarEntrenamientos(tipo){
+    let newArrayEntrenos= [];
+    let datoss = '<?php echo json_encode($datos); ?>';
+        let datos = JSON.parse(datoss);
+         for (let i = 0; i < datos['Entrenamientos'].length; i++) {
+                if( datos['Entrenamientos'][i]['Cod_tipo'] == tipo){
+                  newArrayEntrenos[i]=  datos['usuarios'][i];
+               }
+         }
+        console.log(newArrayEntrenos);
+
+    var tabla = document.getElementById("tabla");
+    tabla.innerHTML = "";
+    let thead = document.createElement("thead");
+    let th = document.createElement("th");
+    let th1 = document.createElement("th");
+    let th2 = document.createElement("th");
+    let th3 = document.createElement("th");
+    let th4 = document.createElement("th");
+    let th5 = document.createElement("th");
+    let th6 = document.createElement("th");
+    let th7 = document.createElement("th");
+    th.appendChild(document.createTextNode("Nombre"));
+    th1.appendChild(document.createTextNode("Vuelta"));
+    th2.appendChild(document.createTextNode("Metros"));
+    th3.appendChild(document.createTextNode("Tiempo"));
+    th4.appendChild(document.createTextNode("Ritmo"));
+    th5.appendChild(document.createTextNode("Superficie"));
+    th6.appendChild(document.createTextNode("Tipo Entrenamientos"));
+    th7.appendChild(document.createTextNode("Acciones"));
+
+    thead.appendChild(th);
+    thead.appendChild(th1);
+    thead.appendChild(th2);
+    thead.appendChild(th3);
+    thead.appendChild(th4);
+    thead.appendChild(th5);
+    thead.appendChild(th6);
+    thead.appendChild(th7);
+
+    
+    tabla.appendChild(thead);
+    let tbody = document.createElement("tbody");
+    
+    newArrayEntrenos.forEach(entre => {
+        
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        let td5 = document.createElement("td");
+        let td6 = document.createElement("td");
+        let td7 = document.createElement("td");
+        let button = document.createElement("button");
+
+        td.appendChild(document.createTextNode(entre['Titulo']));
+        td1.appendChild(document.createTextNode(entre['Vuelta']));
+        td2.appendChild(document.createTextNode(entre['Metros']));
+        td3.appendChild(document.createTextNode(entre['Tiempo']));
+        td4.appendChild(document.createTextNode("Ritmo"));
+        td5.appendChild(document.createTextNode(entre['Tipo']));
+        td6.appendChild(document.createTextNode(entre['Tipo_entrenamiento']));
+        button.appendChild(document.createTextNode("X"));
+        button.addEventListener("click", function(){
+            resultado = confirm('¿Realmente desea eliminar?');
+            if(resultado){
+              window.location.href = "/mvc_completo/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
+            }
+        });
+      })
+       
+
+    }
+  
     
    function getCarreras(){
     fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {

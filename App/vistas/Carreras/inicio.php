@@ -112,6 +112,9 @@ json_encode($datos);
         //carreras = data;
       })
    }
+
+   fuction
+
    function pintarTabla(){
     var datos = <?php echo json_encode($datos);?>;
    var tabla = document.getElementById("tabla");
