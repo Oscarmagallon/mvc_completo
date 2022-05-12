@@ -60,8 +60,9 @@ json_encode($datos);
 </div>
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
-
-            
+<?php
+print_r($datos['Carreras']);
+?>
     </html>
     <script>
      
@@ -113,7 +114,7 @@ json_encode($datos);
       })
    }
 
-   fuction
+
 
    function pintarTabla(){
     var datos = <?php echo json_encode($datos);?>;
@@ -161,9 +162,9 @@ json_encode($datos);
       td4.appendChild(document.createTextNode(datos["Carreras"][i]['Tipo']));
       button.appendChild(document.createTextNode("X"));
       button.addEventListener("click", function(){
-           resultado = confirm('¿Realmente desea eliminar?');
+           resultado = confirm('¿Realmente desea eliminar:'+datos["Carreras"][i]['Cod']+'?');
            if(resultado){
-            window.location.href = "/mvc_completo/Carreras/borrar/"+datos["Carreras"][i]['Cod'];
+            delEntrenamiento(datos["Carreras"][i]['Cod'])
            }
       });
       td5.appendChild(button);  
@@ -177,8 +178,35 @@ json_encode($datos);
       tabla.appendChild(tbody);
 
     
-   }
-   }
+    }
+  }
+
+  function delEntrenamiento(cod){
+      console.log(cod)
+      // cogemos lo datos del formulario
+      const data = cod
+
+      fetch('<?php echo RUTA_URL?>/carreras/delCarrera', {
+          method: "POST",
+          body: data,
+      })
+          .then((resp) => resp.json())
+          .then((data) => {
+              if (Boolean(data)){
+                  console.log('registro borrado')
+                  // this.getCarreras()                                // la pagina 0 es la primera
+                  
+              } else {
+                console.log('error al borrar el registro')
+              }
+          })
+          .catch(function(error) {
+            console.log(error)
+          })
+  }
+
+
+
    window.onload = pintarTabla(); 
 
 

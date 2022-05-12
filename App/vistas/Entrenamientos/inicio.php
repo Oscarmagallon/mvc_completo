@@ -89,8 +89,8 @@ json_encode($datos);
                   Filtrar por
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="" onclick="filtrarEntrenamientos(1)">Suave</a></li>
-                <li><a class="dropdown-item" href="" onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
+                <li class="dropdown-item" onclick="filtrarEntrenamientos(1)">Suave</li>
+                <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
               </ul>
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
@@ -139,12 +139,14 @@ json_encode($datos);
     let newArrayEntrenos= [];
     let datoss = '<?php echo json_encode($datos); ?>';
         let datos = JSON.parse(datoss);
+        console.log(datos);
          for (let i = 0; i < datos['Entrenamientos'].length; i++) {
                 if( datos['Entrenamientos'][i]['Cod_tipo'] == tipo){
-                  newArrayEntrenos[i]=  datos['usuarios'][i];
+                  newArrayEntrenos[i]=  datos['Entrenamientos'][i];
                }
          }
-        console.log(newArrayEntrenos);
+       
+        
 
     var tabla = document.getElementById("tabla");
     tabla.innerHTML = "";
@@ -180,6 +182,8 @@ json_encode($datos);
     let tbody = document.createElement("tbody");
     
     newArrayEntrenos.forEach(entre => {
+
+      
         
         let tr = document.createElement("tr");
         let td = document.createElement("td");
@@ -206,6 +210,17 @@ json_encode($datos);
               window.location.href = "/mvc_completo/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
             }
         });
+      td7.appendChild(button);
+      tr.appendChild(td);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+      tr.appendChild(td5);
+      tr.appendChild(td6);
+      tr.appendChild(td7);
+      tbody.appendChild(tr);
+      tabla.appendChild(tbody);
       })
        
 
@@ -273,9 +288,10 @@ json_encode($datos);
       let td6 = document.createElement("td");
       let td7 = document.createElement("td");
       let button = document.createElement("button");
+      
+      td1.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Vuelta']));
 
       td.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Titulo']));
-      td1.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Vuelta']));
       td2.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Metros']));
       td3.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tiempo']));
       td4.appendChild(document.createTextNode("Ritmo"));
