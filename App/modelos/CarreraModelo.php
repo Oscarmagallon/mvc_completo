@@ -29,6 +29,11 @@
         $this->db->execute();
 
     }
+
+    public function eliminarCarrera($datos){
+        $this->db->query("DELETE from carrera where Cod = $datos");
+        $this->db->execute();
+    }
  }
 
 ?>
