@@ -46,9 +46,9 @@ class Carreras extends Controlador{
     }
 
     public function delCarrera(){
-
-        $datos = 1;
-        $this->vistaApi($datos);
+        $cod= $_POST;
+        $datos = $cod;
+        $this->vistaApi($_POST);
     }
 }
 ?>

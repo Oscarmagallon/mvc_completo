@@ -182,10 +182,12 @@ print_r($datos['Carreras']);
   }
 
   function delEntrenamiento(cod){
-      console.log(cod)
+      // console.log(cod)
       // cogemos lo datos del formulario
-      const data = cod
-
+      const data = new FormData()
+      data.append('cod', cod)
+ 
+// console.log(data)
       fetch('<?php echo RUTA_URL?>/carreras/delCarrera', {
           method: "POST",
           body: data,
@@ -193,7 +195,7 @@ print_r($datos['Carreras']);
           .then((resp) => resp.json())
           .then((data) => {
               if (Boolean(data)){
-                  console.log('registro borrado')
+                  console.log(data)
                   // this.getCarreras()                                // la pagina 0 es la primera
                   
               } else {
