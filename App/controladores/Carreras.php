@@ -1,7 +1,8 @@
 <?php
 class Carreras extends Controlador{
-
+ private $db;
     public function __construct(){
+        $this->db = new Base;
         Sesion::iniciarSesion($this->datos);
         $this->datos['rolesPermitidos'] = [10];
 
@@ -46,9 +47,10 @@ class Carreras extends Controlador{
     }
 
     public function delCarrera(){
-        $cod= $_POST;
-        $datos = $cod;
-        $this->vistaApi($_POST);
+        $cod= $_POST['cod'];
+        $datos = $this->CarreraModelo->eliminarCarrera($cod);
+        $this->vistaApi($datos);    
+        
     }
 }
 ?>
