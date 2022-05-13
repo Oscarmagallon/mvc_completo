@@ -228,9 +228,9 @@ print_r($datos['Carreras']);
         td4.appendChild(document.createTextNode(data[i]['Tipo']));
         button.appendChild(document.createTextNode("X"));
         button.addEventListener("click", function(){
-            resultado = confirm('¿Realmente desea eliminar:'+data[i]['Cod']+'?');
+            resultado = confirm('¿Realmente desea eliminar:'+data[i]['Cod']+'? hola');
             if(resultado){
-              delEntrenamiento(datos["Carreras"][i]['Cod'])
+              delEntrenamiento(data[i]['Cod'])
             }
         });
         td5.appendChild(button);  
