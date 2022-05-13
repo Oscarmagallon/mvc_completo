@@ -167,19 +167,7 @@ print_r($datos['Carreras']);
     }
   }
 
-  function getCarreras(){
-    fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include'
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        //console.log(data);
-        pintarTablaModi(data);
-      })
-   }
+
 
    
 
@@ -275,6 +263,20 @@ print_r($datos['Carreras']);
             console.log(error)
           })
   }
+
+  function getCarreras(){
+    fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        //console.log(data);
+        pintarTablaModi(data);
+      })
+   }
 
 
 
