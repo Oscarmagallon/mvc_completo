@@ -227,19 +227,8 @@ json_encode($datos);
     }
   
     
-   function getCarreras(){
-    fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include'
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data)
-        //carreras = data;
-      })
-   }
+  
+
    function pintarTabla(){
     var datos = <?php echo json_encode($datos);?>;
    console.log(datos["Entrenamientos"][0]['Titulo']);
@@ -322,6 +311,7 @@ json_encode($datos);
 
    }
    }
+   
 
    window.onload = pintarTabla(); 
       

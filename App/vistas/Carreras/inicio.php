@@ -99,20 +99,6 @@ print_r($datos['Carreras']);
 				}
 			}
 		}
-    
-   function getCarreras(){
-    fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {
-      headers: {
-          "Content-Type": "application/json"
-      },
-      credentials: 'include'
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data)
-        //carreras = data;
-      })
-   }
 
 
 
@@ -181,6 +167,89 @@ print_r($datos['Carreras']);
     }
   }
 
+  function getCarreras(){
+    fetch(`<?php echo RUTA_URL?>/Carreras/obtenerCarreras`, {
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        //console.log(data);
+        pintarTablaModi(data);
+      })
+   }
+
+   
+
+   function pintarTablaModi(data){
+    var tabla = document.getElementById("tabla");
+    tabla.innerHTML = "";
+    let thead = document.createElement("thead");
+    let th = document.createElement("th");
+    let th1 = document.createElement("th");
+    let th2 = document.createElement("th");
+    let th3 = document.createElement("th");
+    let th4 = document.createElement("th");
+    let th5 = document.createElement("th");
+    th.appendChild(document.createTextNode("Nombre"));
+    th1.appendChild(document.createTextNode("Metros"));
+    th2.appendChild(document.createTextNode("Tiempo"));
+    th3.appendChild(document.createTextNode("Ritmo"));
+    th4.appendChild(document.createTextNode("Superficie"));
+    th5.appendChild(document.createTextNode("Acciones"));
+
+    thead.appendChild(th);
+    thead.appendChild(th1);
+    thead.appendChild(th2);
+    thead.appendChild(th3);
+    thead.appendChild(th4);
+    thead.appendChild(th5);
+    
+    tabla.appendChild(thead);
+    let tbody = document.createElement("tbody");
+    
+      for (let i = 0; i <= data.length; i++) {
+        
+        let tr = document.createElement("tr");
+        let td = document.createElement("td");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+        let td5 = document.createElement("td");
+        let button = document.createElement("button");
+
+        td.appendChild(document.createTextNode(data[i]['Titulo']));
+        td1.appendChild(document.createTextNode(data[i]['Metros']));
+        td2.appendChild(document.createTextNode(data[i]['Tiempo']));
+        td3.appendChild(document.createTextNode("Ritmo"));
+        td4.appendChild(document.createTextNode(data[i]['Tipo']));
+        button.appendChild(document.createTextNode("X"));
+        button.addEventListener("click", function(){
+            resultado = confirm('¿Realmente desea eliminar:'+data[i]['Cod']+'?');
+            if(resultado){
+              delEntrenamiento(datos["Carreras"][i]['Cod'])
+            }
+        });
+        td5.appendChild(button);  
+        tr.appendChild(td);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        tbody.appendChild(tr);
+        tabla.appendChild(tbody);
+
+      
+      }
+
+
+   }
+  
+
   function delEntrenamiento(cod){
       // console.log(cod)
       // cogemos lo datos del formulario
@@ -196,7 +265,7 @@ print_r($datos['Carreras']);
           .then((data) => {
               if (Boolean(data)){
                   console.log(data)
-                  // this.getCarreras()                                // la pagina 0 es la primera
+                  this.getCarreras()                              // la pagina 0 es la primera
                   
               } else {
                 console.log('error al borrar el registro')

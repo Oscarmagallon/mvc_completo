@@ -49,6 +49,18 @@ class Carreras extends Controlador{
     public function delCarrera(){
         $cod= $_POST['cod'];
         $datos = $this->CarreraModelo->eliminarCarrera($cod);
+       
+        if(empty($datos)){
+            $bandera = 0;
+        }
+            $bandera = 1;
+        
+        $this->vistaApi($bandera);    
+        
+    }
+
+    public function getCarreras(){
+        $datos = $this->CarreraModelo->obtenerCarreras();
         $this->vistaApi($datos);    
         
     }
