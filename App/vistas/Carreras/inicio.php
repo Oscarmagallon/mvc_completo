@@ -5,7 +5,6 @@ json_encode($datos);
 
 <html>
 <div>
-</nav>
     <div class="container-fluid px-2">
 
                 <ul class="navbar-nav">
@@ -58,11 +57,60 @@ json_encode($datos);
 </form>
   </div>
 </div>
+
+<div>
+    <div class="container-fluid px-2">
+
+             
+    </div>
+    <div class="modal fade" id="modalAdd" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h5 class="modal-title">Editar Carrera</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="Carreras/crear" method="POST">
+          <label for="fecha">Fecha</label>
+          <input type="date"name="fecha" id="fecha">
+          <label for="Titulo">Titulo</label>
+          <input type="text" name="titulo" id="titulo">
+          <p>Superficie</p>
+            <input type="radio" id="Cross" name ="superficie" value="1">
+            <label for="Cross">Cross</label>
+            <input type="radio" id="Tierra" name ="superficie" value="2">
+            <label for="Tierra">Tierra</label>
+            <input type="radio" id="Pista" name ="superficie"  value="3">
+            <label for="Pista">Pista</label> <br>
+          <input type="number" value ="" name="metros"> &nbsp;
+          <input type="time" id="tiempo" name="tiempo">
+          <select name="usuarios" id="usuarios">
+              <?php 
+                foreach ($datos["Usuarios"] as $u):
+              ?>
+              <option value="<?php echo $u->idUsuario ?>"><?php echo $u->Nombre ?></option>
+                <?php endforeach; ?>
+          </select>
+
+
+        
+      </div>
+      <div class="modal-footer">
+        
+      <button type="submit" class="button">Agregar</button>
+        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      </div>
+    </div>
+</form>
+  </div>
+</div>
+
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
-<?php
-print_r($datos['Carreras']);
-?>
+
+       
     </html>
     <script>
      
@@ -140,12 +188,20 @@ print_r($datos['Carreras']);
       let td4 = document.createElement("td");
       let td5 = document.createElement("td");
       let button = document.createElement("button");
+      let a = document.createElement("a");
 
       td.appendChild(document.createTextNode(datos["Carreras"][i]['Titulo']));
       td1.appendChild(document.createTextNode(datos["Carreras"][i]['Metros']));
       td2.appendChild(document.createTextNode(datos["Carreras"][i]['Tiempo']));
       td3.appendChild(document.createTextNode("Ritmo"));
       td4.appendChild(document.createTextNode(datos["Carreras"][i]['Tipo']));
+      a.appendChild(document.createTextNode("Edit"));
+      a.setAttribute("data-bs-toggle", "modal");
+      a.setAttribute("data-bs-target", "#modalAdd");
+      a.className += "btn btn-success float-end";
+
+      
+
       button.appendChild(document.createTextNode("X"));
       button.addEventListener("click", function(){
            resultado = confirm('¿Realmente desea eliminar:'+datos["Carreras"][i]['Cod']+'?');
@@ -153,6 +209,7 @@ print_r($datos['Carreras']);
             delEntrenamiento(datos["Carreras"][i]['Cod'])
            }
       });
+      td5.appendChild(a);
       td5.appendChild(button);  
       tr.appendChild(td);
       tr.appendChild(td1);
