@@ -77,7 +77,7 @@ json_encode($datos);
           <label for="fecha">Fecha</label>
           <input type="date"name="fecha" id="fecha">
           <label for="Titulo">Titulo</label>
-          <input type="text" name="titulo" id="titulo">
+          <input type="text" name="titulo"  id="tituloo">
           <p>Superficie</p>
             <input type="radio" id="Cross" name ="superficie" value="1">
             <label for="Cross">Cross</label>
@@ -151,9 +151,13 @@ json_encode($datos);
 
 
    function pintarTabla(){
+
     var datos = <?php echo json_encode($datos);?>;
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
+   let titulo = document.getElementById("tituloo")
+   titulo.setAttribute("value","Hola");
+  
    let thead = document.createElement("thead");
    let th = document.createElement("th");
    let th1 = document.createElement("th");
@@ -189,16 +193,19 @@ json_encode($datos);
       let td5 = document.createElement("td");
       let button = document.createElement("button");
       let a = document.createElement("a");
+      
 
       td.appendChild(document.createTextNode(datos["Carreras"][i]['Titulo']));
       td1.appendChild(document.createTextNode(datos["Carreras"][i]['Metros']));
       td2.appendChild(document.createTextNode(datos["Carreras"][i]['Tiempo']));
       td3.appendChild(document.createTextNode("Ritmo"));
       td4.appendChild(document.createTextNode(datos["Carreras"][i]['Tipo']));
+      titulo.setAttribute("value", datos["Carreras"][i]['Titulo']);
       a.appendChild(document.createTextNode("Edit"));
       a.setAttribute("data-bs-toggle", "modal");
       a.setAttribute("data-bs-target", "#modalAdd");
       a.className += "btn btn-success float-end";
+    
 
       
 
