@@ -52,7 +52,8 @@ json_encode($datos);
       <div class="modal-footer">
         
       <button type="submit" class="button">Agregar</button>
-        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      </div>
+        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      
+      </div>
     </div>
 </form>
   </div>
@@ -61,7 +62,7 @@ json_encode($datos);
 <div>
     <div class="container-fluid px-2">
 
-             
+          
     </div>
     <div class="modal fade" id="modalAdd" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsuarioLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -73,7 +74,7 @@ json_encode($datos);
         </button>
       </div>
       <div class="modal-body">
-      <form method="post" id="formEditCarrera" class="card-body" action="javascript:editCarrera(1)">
+      <form method="post" id="formEditCarrera" class="card-body" action="javascript:editCarrera()">
           <label for="fecha">Fecha</label>
           <input type="date"name="fecha" id="fecha">
           <label for="Titulo">Titulo</label>
@@ -226,27 +227,25 @@ json_encode($datos);
 
    }
 
-   function editCarrera(cod){
-      console.log(cod)
-      // cogemos lo datos del formulario
-      // const data = new FormData(document.getElementById("formEditEntrenamiento"));
-      // console.log(data);
-      // fetch('<?php echo RUTA_URL?>/carreras/delCarrera', {
-      //     method: "POST",
-      //     body: data,
-      // })
-      //     .then((resp) => resp.json())
-      //     .then((data) => {
-      //         if (Boolean(data)){
-      //             this.getCarreras()                              // la pagina 0 es la primera
+   function editCarrera(){
+      //cogemos lo datos del formulario
+      const data = new FormData(document.getElementById("formEditCarrera"));
+      fetch('<?php echo RUTA_URL?>/carreras/editarCarrera', {
+          method: "POST",
+          body: data,
+      })
+          .then((resp) => resp.json())
+          .then((data) => {
+              if (Boolean(data)){
+                   console.log(data)                         
                   
-      //         } else {
-      //           console.log('error al borrar el registro')
-      //         }
-      //     })
-      //     .catch(function(error) {
-      //       console.log(error)
-      //     })
+              } else {
+                console.log('error al borrar el registro')
+              }
+          })
+          .catch(function(error) {
+            console.log(error)
+          })
   }
 
   function delEntrenamiento(cod){
