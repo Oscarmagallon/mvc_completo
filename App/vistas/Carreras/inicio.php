@@ -26,9 +26,9 @@ json_encode($datos);
       <div class="modal-body">
         <form action="Carreras/crear" method="POST">
           <label for="fecha">Fecha</label>
-          <input type="date"name="fecha" id="fecha">
+          <input type="date"name="fecha" id="fechaedit">
           <label for="Titulo">Titulo</label>
-          <input type="text" name="titulo" id="titulo">
+          <input type="text" name="titulo" id="tituloedit">
           <p>Superficie</p>
             <input type="radio" id="Cross" name ="superficie" value="1">
             <label for="Cross">Cross</label>
@@ -75,8 +75,9 @@ json_encode($datos);
       </div>
       <div class="modal-body">
       <form method="post" id="formEditCarrera" class="card-body" action="javascript:editCarrera()">
+        <input type="hidden" id="Cod"> 
           <label for="fecha">Fecha</label>
-          <input type="date"name="fecha" id="fecha">
+          <input type="text" name="fecha" id="fecha">
           <label for="Titulo">Titulo</label>
           <input type="text" name="titulo"  id="tituloo">
           <p>Superficie</p>
@@ -109,11 +110,14 @@ json_encode($datos);
 
   </div>
 </div>
+<?php
+  print_r($datos);
+?>
 
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
 
-       
+       >
     </html>
     <script>
      
@@ -155,8 +159,13 @@ json_encode($datos);
    function pintarTablaModi(data){
     var tabla = document.getElementById("tabla");
     tabla.innerHTML = "";
+    let titulo = document.getElementById("tituloo");
+    let tiempo = document.getElementById("tiempo");
+    let user = document.getElementById("usuarios");
+    let fecha = document.getElementById("fecha");
+    let cod = document.getElementById("Cod");
 
-    let titulo = document.getElementById("tituloo")
+
     let thead = document.createElement("thead");
     let th = document.createElement("th");
     let th1 = document.createElement("th");
@@ -164,6 +173,7 @@ json_encode($datos);
     let th3 = document.createElement("th");
     let th4 = document.createElement("th");
     let th5 = document.createElement("th");
+    
     th.appendChild(document.createTextNode("Nombre"));
     th1.appendChild(document.createTextNode("Metros"));
     th2.appendChild(document.createTextNode("Tiempo"));
@@ -198,8 +208,18 @@ json_encode($datos);
         td2.appendChild(document.createTextNode(data[i]['Tiempo']));
         td3.appendChild(document.createTextNode("Ritmo"));
         td4.appendChild(document.createTextNode(data[i]['Tipo']));
-        titulo.setAttribute("value", data[i]['Titulo']);
         a.appendChild(document.createTextNode("Edit"));
+        a.addEventListener("click", function(){
+          titulo.setAttribute("value", data[i]['Titulo']);
+          tiempo.setAttribute("value",data[i]['Tiempo']);
+          // fecha.setAttribute("value",data[i]['Fecha']);
+          // fecha.setAttribute("value",'1999-11-24');
+          fecha.setAttribute("value",'rrrr');
+          Cod.setAttribute("value",data[i]['Cod'])
+          
+
+
+        });
         a.setAttribute("data-bs-toggle", "modal");
         a.setAttribute("data-bs-target", "#modalAdd");
         a.className += "btn btn-success float-end";
