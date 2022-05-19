@@ -75,21 +75,21 @@ json_encode($datos);
       </div>
       <div class="modal-body">
       <form method="post" id="formEditCarrera" class="card-body" action="javascript:editCarrera()">
-        <input type="hidden" id="Cod"> 
+        <input type="hidden" id="Cod" name = "Cod"> 
           <label for="fecha">Fecha</label>
-          <input type="text" name="fecha" id="fecha">
+          <input type="text" name="fecha" id="fechaa">
           <label for="Titulo">Titulo</label>
-          <input type="text" name="titulo"  id="tituloo">
+          <input type="text" name="tituloo"  id="tituloo">
           <p>Superficie</p>
-            <input type="radio" id="Cross" name ="superficie" value="1">
+            <input type="radio" id="Cross" name ="superficiee" value="1">
             <label for="Cross">Cross</label>
-            <input type="radio" id="Tierra" name ="superficie" value="2">
+            <input type="radio" id="Tierra" name ="superficiee" value="2">
             <label for="Tierra">Tierra</label>
-            <input type="radio" id="Pista" name ="superficie"  value="3">
+            <input type="radio" id="Pista" name ="superficiee"  value="3">
             <label for="Pista">Pista</label> <br>
-          <input type="number" value ="" name="metros"> &nbsp;
-          <input type="time" id="tiempo" name="tiempo">
-          <select name="usuarios" id="usuarios">
+          <input type="number" value ="" name="metross" id = "metross">  &nbsp;
+          <input type="time" id="tiempo" name="tiempoo">
+          <select name="usuarioss" id="usuarios">
               <?php 
                 foreach ($datos["Usuarios"] as $u):
               ?>
@@ -162,9 +162,9 @@ json_encode($datos);
     let titulo = document.getElementById("tituloo");
     let tiempo = document.getElementById("tiempo");
     let user = document.getElementById("usuarios");
-    let fecha = document.getElementById("fecha");
+    let fecha = document.getElementById("fechaa");
     let cod = document.getElementById("Cod");
-
+    let metros = document.getElementById("metross")
 
     let thead = document.createElement("thead");
     let th = document.createElement("th");
@@ -212,10 +212,9 @@ json_encode($datos);
         a.addEventListener("click", function(){
           titulo.setAttribute("value", data[i]['Titulo']);
           tiempo.setAttribute("value",data[i]['Tiempo']);
-          // fecha.setAttribute("value",data[i]['Fecha']);
-          // fecha.setAttribute("value",'1999-11-24');
-          fecha.setAttribute("value",'rrrr');
-          Cod.setAttribute("value",data[i]['Cod'])
+          fecha.setAttribute("value",data[i]['Fecha']);
+          Cod.setAttribute("value",data[i]['Cod']);
+          metros.setAttribute("value",data[i]['Metros'])
           
 
 

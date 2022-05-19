@@ -29,6 +29,20 @@
         $this->db->execute();
 
     }
+    public function modificarCarrera($datos){
+        $this->db->query("UPDATE carrera set Titulo = :titulo, Metros = :metros, Tiempo = :tiempo,Superficie_Cod = :superficie , idUsuario = :usuario, Fecha =:fecha where Cod = :cod" );
+        $this->db->bind(':titulo',$datos['Titulo']);
+        $this->db->bind(':metros',$datos['Metros']);
+        $this->db->bind(':tiempo',$datos['Tiempo']);
+        $this->db->bind(':superficie',$datos['superficie']);
+        $this->db->bind(':usuario',$datos['CodUser']);
+        $this->db->bind(':fecha',$datos['Fecha']);
+        $this->db->bind(':cod',$datos['Cod']);
+        $this->db->execute();
+
+
+
+    }
 
     public function eliminarCarrera($datos){
         $this->db->query("DELETE from carrera where Cod = $datos");

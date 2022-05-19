@@ -59,18 +59,20 @@ class Carreras extends Controlador{
         
     }
     public function editarCarrera(){
-        $carreraEditada = [
+         $carreraEditada = [
             'Fecha' => trim($_POST["fecha"]),
-            'Titulo' => trim($_POST["titulo"]),
-            'Tiempo' => trim($_POST["tiempo"]),
-            'superficie' => trim($_POST['superficie']),
-            'CodUser' => trim($_POST['usuarios']),
-            'Metros' => trim($_POST['metros']),
+            'Titulo' => trim($_POST["tituloo"]),
+            'Tiempo' => trim($_POST["tiempoo"]),
+            'superficie' => trim($_POST['superficiee']),
+            'CodUser' => trim($_POST['usuarioss']),
+            'Metros' => trim($_POST['metross']),
             'Cod' => trim($_POST['Cod'])
-        ];
+        ]; 
         $bandera = 1;
-        $this->vistaApi($bandera); 
-        //$datos = $this->CarreraModelo->eliminarCarrera($data);
+        //$this->CarreraModelo->modificarCarrera($carreraEditada);
+        
+        $this->vistaApi($carreraEditada); 
+        
 
 
     }
