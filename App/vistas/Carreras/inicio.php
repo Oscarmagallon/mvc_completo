@@ -113,6 +113,14 @@ json_encode($datos);
 <?php
   print_r($datos);
 ?>
+ <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Filtrar por superficie</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="dropdown-item" onclick="filtrarSuperficie(1)">Cross</li>
+                <li><a class="dropdown-item"  onclick="filtrarSuperficie(2)">Tierra</a></li>
+                <li><a class="dropdown-item"  onclick="filtrarSuperficie(3)">Pista</a></li>
+              </ul>
 
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
@@ -154,9 +162,32 @@ json_encode($datos);
 				}
 			}
 		}
-   
+    function filtrarSuperficie(tipo){
+    let newArrayEntrenos= [];
+    let newArrayEntrenoss= [];
+    let datoss = '<?php echo json_encode($datos); ?>';
+        let datos = JSON.parse(datoss);
+         for (let i = 0; i < datos['Carreras'].length; i++) {
+                if( datos['Carreras'][i]['Superficie_Cod'] == tipo){
+                  newArrayEntrenos[i] =  datos['Carreras'][i];
+               }
+         }
+         newArrayEntrenoss = cleanArray(newArrayEntrenos);
+         
+         pintarTablaModi(newArrayEntrenoss);
+    }
 
+    function cleanArray(actual){
+  var newArray = new Array();
+  for( var i = 0, j = actual.length; i < j; i++ ){
+      if ( actual[ i ] ){
+        newArray.push( actual[ i ] );
+    }
+  }
+  return newArray;
+}
    function pintarTablaModi(data){
+     console.log(data);
     var tabla = document.getElementById("tabla");
     tabla.innerHTML = "";
     let titulo = document.getElementById("tituloo");
