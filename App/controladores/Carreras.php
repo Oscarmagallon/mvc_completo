@@ -69,9 +69,13 @@ class Carreras extends Controlador{
             'Cod' => trim($_POST['Cod'])
         ]; 
       
+         $datos = $this->CarreraModelo->modificarCarrera($carreraEditada);
+        if(empty($datos)){
+            $bandera = 0;
+        }
+            $bandera = 1; 
+        $this->vistaApi($bandera); 
         
-        $this->vistaApi($carreraEditada); 
-        $this->CarreraModelo->modificarCarrera($carreraEditada);
 
         
 

@@ -256,7 +256,7 @@ json_encode($datos);
           .then((resp) => resp.json())
           .then((data) => {
               if (Boolean(data)){
-                   console.log(data)                         
+                  this.getCarreras()                        
                   
               } else {
                 console.log('error al borrar el registro')
