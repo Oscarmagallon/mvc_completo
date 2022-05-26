@@ -229,7 +229,7 @@ json_encode($datos);
     
   
 
-   function pintarTabla()){
+   function pintarTabla(){
     var datos = <?php echo json_encode($datos);?>;
    console.log(datos["Entrenamientos"][0]['Titulo']);
    var tabla = document.getElementById("tabla");
