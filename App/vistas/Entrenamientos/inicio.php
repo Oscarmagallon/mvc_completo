@@ -218,14 +218,14 @@ json_encode($datos);
            }
           });
         a.appendChild(document.createTextNode("Edit"));
-        a.addEventListener("click", function(){
-          titulo.setAttribute("value", data[i]['Titulo']);
-          tiempo.setAttribute("value",data[i]['Tiempo']);
-          fecha.setAttribute("value",data[i]['Fecha']);
-          Cod.setAttribute("value",data[i]['Cod']);
-          metros.setAttribute("value",data[i]['Metros'])
+        // a.addEventListener("click", function(){
+        //   titulo.setAttribute("value", data[i]['Titulo']);
+        //   tiempo.setAttribute("value",data[i]['Tiempo']);
+        //   fecha.setAttribute("value",data[i]['Fecha']);
+        //   Cod.setAttribute("value",data[i]['Cod']);
+        //   metros.setAttribute("value",data[i]['Metros'])
           
-        });
+        // });
         //descomentar para editar cuando tenga el modal
         // a.setAttribute("data-bs-toggle", "modal");
         // a.setAttribute("data-bs-target", "#modalAdd");
