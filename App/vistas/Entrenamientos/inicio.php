@@ -137,101 +137,25 @@ json_encode($datos);
 
     function filtrarEntrenamientos(tipo){
     let newArrayEntrenos= [];
+    let newArrayEntrenoss= [];
     let datoss = '<?php echo json_encode($datos); ?>';
         let datos = JSON.parse(datoss);
-        console.log(datos);
+        
          for (let i = 0; i < datos['Entrenamientos'].length; i++) {
                 if( datos['Entrenamientos'][i]['Cod_tipo'] == tipo){
                   newArrayEntrenos[i]=  datos['Entrenamientos'][i];
                }
          }
-       
-        
-
-    var tabla = document.getElementById("tabla");
-    tabla.innerHTML = "";
-    let thead = document.createElement("thead");
-    let th = document.createElement("th");
-    let th1 = document.createElement("th");
-    let th2 = document.createElement("th");
-    let th3 = document.createElement("th");
-    let th4 = document.createElement("th");
-    let th5 = document.createElement("th");
-    let th6 = document.createElement("th");
-    let th7 = document.createElement("th");
-    th.appendChild(document.createTextNode("Nombre"));
-    th1.appendChild(document.createTextNode("Vuelta"));
-    th2.appendChild(document.createTextNode("Metros"));
-    th3.appendChild(document.createTextNode("Tiempo"));
-    th4.appendChild(document.createTextNode("Ritmo"));
-    th5.appendChild(document.createTextNode("Superficie"));
-    th6.appendChild(document.createTextNode("Tipo Entrenamientos"));
-    th7.appendChild(document.createTextNode("Acciones"));
-
-    thead.appendChild(th);
-    thead.appendChild(th1);
-    thead.appendChild(th2);
-    thead.appendChild(th3);
-    thead.appendChild(th4);
-    thead.appendChild(th5);
-    thead.appendChild(th6);
-    thead.appendChild(th7);
-
-    
-    tabla.appendChild(thead);
-    let tbody = document.createElement("tbody");
-    
-    newArrayEntrenos.forEach(entre => {
-
-      
-        
-        let tr = document.createElement("tr");
-        let td = document.createElement("td");
-        let td1 = document.createElement("td");
-        let td2 = document.createElement("td");
-        let td3 = document.createElement("td");
-        let td4 = document.createElement("td");
-        let td5 = document.createElement("td");
-        let td6 = document.createElement("td");
-        let td7 = document.createElement("td");
-        let button = document.createElement("button");
-
-        td.appendChild(document.createTextNode(entre['Titulo']));
-        td1.appendChild(document.createTextNode(entre['Vuelta']));
-        td2.appendChild(document.createTextNode(entre['Metros']));
-        td3.appendChild(document.createTextNode(entre['Tiempo']));
-        td4.appendChild(document.createTextNode("Ritmo"));
-        td5.appendChild(document.createTextNode(entre['Tipo']));
-        td6.appendChild(document.createTextNode(entre['Tipo_entrenamiento']));
-        button.appendChild(document.createTextNode("X"));
-        button.addEventListener("click", function(){
-            resultado = confirm('¿Realmente desea eliminar?');
-            if(resultado){
-              window.location.href = "/mvc_completo/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
-            }
-        });
-      td7.appendChild(button);
-      tr.appendChild(td);
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tr.appendChild(td3);
-      tr.appendChild(td4);
-      tr.appendChild(td5);
-      tr.appendChild(td6);
-      tr.appendChild(td7);
-      tbody.appendChild(tr);
-      tabla.appendChild(tbody);
-      })
-       
+         newArrayEntrenoss = cleanArray(newArrayEntrenos);
+       pintarTabla(newArrayEntrenoss)
 
     }
   
     
   
 
-   function pintarTabla(){
-    var datos = <?php echo json_encode($datos);?>;
-   console.log(datos["Entrenamientos"][0]['Titulo']);
+   function pintarTabla(data){
+   console.log(data);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
    let thead = document.createElement("thead");
@@ -265,7 +189,7 @@ json_encode($datos);
    tabla.appendChild(thead);
    let tbody = document.createElement("tbody");
   
-    for (let i = 0; i <= datos["Entrenamientos"].length; i++) {
+    for (let i = 0; i <= data.length; i++) {
       
       let tr = document.createElement("tr");
       let td = document.createElement("td");
@@ -277,43 +201,63 @@ json_encode($datos);
       let td6 = document.createElement("td");
       let td7 = document.createElement("td");
       let button = document.createElement("button");
+      let a = document.createElement("button");
       
-      td1.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Vuelta']));
-
-      td.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Titulo']));
-      td2.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Metros']));
-      td3.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tiempo']));
-      td4.appendChild(document.createTextNode("Ritmo"));
-      td5.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tipo']));
-      td6.appendChild(document.createTextNode(datos["Entrenamientos"][i]['Tipo_entrenamiento']));
-      button.appendChild(document.createTextNode("X"));
-      button.addEventListener("click", function(){
+        td.appendChild(document.createTextNode(data[i]['Titulo']));
+        td1.appendChild(document.createTextNode(data[i]['Vuelta']));
+        td2.appendChild(document.createTextNode(data[i]['Metros']));
+        td3.appendChild(document.createTextNode(data[i]['Tiempo']));
+        td4.appendChild(document.createTextNode("Ritmo"));
+        td5.appendChild(document.createTextNode(data[i]["Tipo"]));
+        td6.appendChild(document.createTextNode(data[i]["Tipo_entrenamiento"]));
+        button.appendChild(document.createTextNode("X"));
+        button.addEventListener("click", function(){
            resultado = confirm('¿Realmente desea eliminar?');
            if(resultado){
-            window.location.href = "/mvc_completo/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
+            window.location.href = "/mvc_completo/Entrenamientos/borrar/"+data[i]['Cod'];
            }
+          });
+        a.appendChild(document.createTextNode("Edit"));
+        a.addEventListener("click", function(){
+          titulo.setAttribute("value", data[i]['Titulo']);
+          tiempo.setAttribute("value",data[i]['Tiempo']);
+          fecha.setAttribute("value",data[i]['Fecha']);
+          Cod.setAttribute("value",data[i]['Cod']);
+          metros.setAttribute("value",data[i]['Metros'])
+          
+        });
+        //descomentar para editar cuando tenga el modal
+        // a.setAttribute("data-bs-toggle", "modal");
+        // a.setAttribute("data-bs-target", "#modalAdd");
+        // a.className += "btn btn-success float-end";
+        td7.appendChild(a);
+        td7.appendChild(button);  
+        tr.appendChild(td);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        tr.appendChild(td5);
+        tr.appendChild(td6);
+        tr.appendChild(td7);
+        tbody.appendChild(tr);
+        tabla.appendChild(tbody);
+      }
+  }
 
-});
-      //a.href="<?//php echo RUTA_URL?>/Entrenamientos/borrar/"+datos["Entrenamientos"][i]['Cod'];
-      
-      td7.appendChild(button);
-      tr.appendChild(td);
-      tr.appendChild(td1);
-      tr.appendChild(td2);
-      tr.appendChild(td3);
-      tr.appendChild(td4);
-      tr.appendChild(td5);
-      tr.appendChild(td6);
-      tr.appendChild(td7);
-      tbody.appendChild(tr);
-      tabla.appendChild(tbody);
-
-
-   }
-   }
+  function cleanArray(actual){
+  var newArray = new Array();
+  for( var i = 0, j = actual.length; i < j; i++ ){
+      if ( actual[ i ] ){
+        newArray.push( actual[ i ] );
+    }
+  }
+  return newArray;
+}
    
+  let datos = <?php echo json_encode($datos["Entrenamientos"]);?>
 
-   window.onload = pintarTabla(); 
+   window.onload = pintarTabla(datos); 
       
     
     

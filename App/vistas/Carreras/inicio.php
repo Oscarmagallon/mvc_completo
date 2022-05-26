@@ -189,7 +189,6 @@ json_encode($datos);
   return newArray;
 }
    function pintarTablaModi(data){
-     console.log(data);
     var tabla = document.getElementById("tabla");
     tabla.innerHTML = "";
     let titulo = document.getElementById("tituloo");
@@ -259,7 +258,7 @@ json_encode($datos);
         button.addEventListener("click", function(){
             resultado = confirm('¿Realmente desea eliminar:'+data[i]['Cod']+'? hola');
             if(resultado){
-              delEntrenamiento(data[i]['Cod'])
+              delCarrera(data[i]['Cod'])
             }
         });
         td5.appendChild(a);
@@ -300,7 +299,7 @@ json_encode($datos);
           })
   }
 
-  function delEntrenamiento(cod){
+  function delCarrera(cod){
       // console.log(cod)
       // cogemos lo datos del formulario
       const data = new FormData()
