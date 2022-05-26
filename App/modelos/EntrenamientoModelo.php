@@ -27,6 +27,7 @@
 
     }
     public function agregarEntrenamientos($datos) {
+        print_r($datos);
     
         $this->db->query("INSERT into entrenamiento Values (null,:vuelta, :titulo, :tiempo, :metros, :Tipo_entre, :superficie, :usuario, :entrenador,:fecha)");
         $this->db->bind(':vuelta',$datos['Vueltas']);
