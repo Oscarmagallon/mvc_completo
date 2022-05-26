@@ -162,6 +162,8 @@ json_encode($datos);
 				}
 			}
 		}
+
+    //datos['Carreras']['Superficie_Cod'] llegan mal
     function filtrarSuperficie(tipo){
     let newArrayEntrenos= [];
     let newArrayEntrenoss= [];
@@ -176,7 +178,7 @@ json_encode($datos);
          
          pintarTablaModi(newArrayEntrenoss);
     }
-
+//borrar cuando se pueda para depurar codigo
     function cleanArray(actual){
   var newArray = new Array();
   for( var i = 0, j = actual.length; i < j; i++ ){
