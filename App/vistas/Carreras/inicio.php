@@ -59,12 +59,13 @@ json_encode($datos);
   </div>
 </div>
 
+
 <div>
     <div class="container-fluid px-2">
 
           
     </div>
-    <div class="modal fade" id="modalAdd" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsuarioLabel" aria-hidden="true">
+    <div class="modal fade" id="modalEdit" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsuarioLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -178,7 +179,7 @@ json_encode($datos);
          
          pintarTablaModi(newArrayEntrenoss);
     }
-//borrar cuando se pueda para depurar codigo
+//borrar cuando se pueda :)
     function cleanArray(actual){
   var newArray = new Array();
   for( var i = 0, j = actual.length; i < j; i++ ){
@@ -196,7 +197,7 @@ json_encode($datos);
     let user = document.getElementById("usuarios");
     let fecha = document.getElementById("fechaa");
     let cod = document.getElementById("Cod");
-    let metros = document.getElementById("metross")
+    let metros = document.getElementById("metross");
 
     let thead = document.createElement("thead");
     let th = document.createElement("th");
@@ -252,7 +253,7 @@ json_encode($datos);
 
         });
         a.setAttribute("data-bs-toggle", "modal");
-        a.setAttribute("data-bs-target", "#modalAdd");
+        a.setAttribute("data-bs-target", "#modalEdit");
         a.className += "btn btn-success float-end";
         button.appendChild(document.createTextNode("X"));
         button.addEventListener("click", function(){

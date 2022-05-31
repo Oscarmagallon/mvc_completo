@@ -84,6 +84,74 @@ json_encode($datos);
   </div>
 </div>
 
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h5 class="modal-title">Editar Entrenamiento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method="POST">
+          <input type="hidden" value ="" id="Cod">
+          <label for="fecha">Fecha</label> <br>
+          <input type="date" name="fecha" value="" id="fechaa">
+          <label for="vueltas">vueltas</label>
+          <input type="number" value ="" name="vueltas"> 
+          <label for="Titulo">Titulo</label>
+          <input type="text" name="titulo" id="tituloo">
+          <label for="tiempo">Tiempo</label>
+          <input type="time" id="tiempoo" name="tiempo">
+          <p>Superficie</p>
+            <?php foreach ($datos['Superficie'] as $s): ?>
+                <label for="<?php echo $s->Tipo ?>"><?php echo $s->Tipo ?></label>
+
+                <input type="radio" id="<?php echo $s->Tipo ?>" name ="superficie" value="<?php echo $s->Cod ?>">
+            <?php endforeach ?>
+            <br>
+          <label for="Metros">Metros </label>
+          <input type="number" value ="" id ="metross" name="metros"> <br>
+          
+          <label for="Tipo">Tipo Entrenamiento</label>
+          <select name="Tipo" id="Tipo">
+              <?php 
+                foreach ($datos["Tipo_entreno"] as $u):
+              ?>
+              <option value="<?php echo $u->Cod ?>"><?php echo $u->Tipo_entrenamiento ?></option>
+                <?php endforeach; ?>
+          </select>
+          &nbsp;  &nbsp;  &nbsp;  &nbsp;
+          <label for="usuarios">Atleta</label>
+          <select name="usuarios" id="usuarioss">
+              <?php 
+                foreach ($datos["Usuarios"] as $u):
+              ?>
+              <option value="<?php echo $u->idUsuario ?>"><?php echo $u->Nombre ?></option>
+                <?php endforeach; ?>
+          </select>
+          <br>
+          <label for="entrenador">Entrenador</label>
+          <select name="entrenador" id="entrenador">
+              <?php 
+                foreach ($datos["Entrenadores"] as $u):
+              ?>
+              <option value="<?php echo $u->idUsuario ?>"><?php echo $u->Nombre ?></option>
+                <?php endforeach; ?>
+          </select>
+        
+      </div>
+      <div class="modal-footer">
+        
+      <button type="submit" class="button">Agregar</button>
+        <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      
+      </div>
+    </div>
+</form>
+  </div>
+</div>
+
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
                   Filtrar por
@@ -150,14 +218,23 @@ json_encode($datos);
        pintarTabla(newArrayEntrenoss)
 
     }
-  
-    
+
+
+    function editarEntrenamiento(){
+
+    }    
   
 
    function pintarTabla(data){
    console.log(data);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
+   let titulo = document.getElementById("tituloo");
+   let tiempo = document.getElementById("tiempoo");
+   let user = document.getElementById("usuarioss");
+   let fecha = document.getElementById("fechaa");
+   let cod = document.getElementById("Cod");
+   let metros = document.getElementById("metross");
    let thead = document.createElement("thead");
    let th = document.createElement("th");
    let th1 = document.createElement("th");
@@ -218,18 +295,18 @@ json_encode($datos);
            }
           });
         a.appendChild(document.createTextNode("Edit"));
-        // a.addEventListener("click", function(){
-        //   titulo.setAttribute("value", data[i]['Titulo']);
-        //   tiempo.setAttribute("value",data[i]['Tiempo']);
-        //   fecha.setAttribute("value",data[i]['Fecha']);
-        //   Cod.setAttribute("value",data[i]['Cod']);
-        //   metros.setAttribute("value",data[i]['Metros'])
+         a.addEventListener("click", function(){
+           titulo.setAttribute("value", data[i]['Titulo']);
+           tiempo.setAttribute("value",data[i]['Tiempo']);
+           fecha.setAttribute("value",data[i]['fecha']);
+           Cod.setAttribute("value",data[i]['Cod']);
+           metros.setAttribute("value",data[i]['Metros'])
           
-        // });
-        //descomentar para editar cuando tenga el modal
-        // a.setAttribute("data-bs-toggle", "modal");
-        // a.setAttribute("data-bs-target", "#modalAdd");
-        // a.className += "btn btn-success float-end";
+         });
+        // descomentar para editar cuando tenga el modal
+         a.setAttribute("data-bs-toggle", "modal");
+         a.setAttribute("data-bs-target", "#editModal");
+         a.className += "btn btn-success float-end";
         td7.appendChild(a);
         td7.appendChild(button);  
         tr.appendChild(td);
