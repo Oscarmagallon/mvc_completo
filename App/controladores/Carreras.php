@@ -70,10 +70,7 @@ class Carreras extends Controlador{
         ]; 
       
          $datos = $this->CarreraModelo->modificarCarrera($carreraEditada);
-        if(empty($datos)){
-            $bandera = 0;
-        }
-            $bandera = 1; 
+         $bandera = 1; 
         $this->vistaApi($bandera); 
         
 

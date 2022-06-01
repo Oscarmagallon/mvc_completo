@@ -94,8 +94,8 @@ json_encode($datos);
         </button>
       </div>
       <div class="modal-body">
-        <form  method="POST">
-          <input type="hidden" value ="" id="Cod">
+        <form  method="POST" id="formEditEntrenamiento" action="javascript:editarEntrenamiento()">
+          <input type="hidden" value ="" id="Cod" name="Cod">
           <label for="fecha">Fecha</label> <br>
           <input type="date" name="fecha" value="" id="fechaa">
           <label for="vueltas">vueltas</label>
@@ -142,13 +142,14 @@ json_encode($datos);
           </select>
         
       </div>
+      </form>
       <div class="modal-footer">
         
-      <button type="submit" class="button">Agregar</button>
+      <button type="submit" form="formEditEntrenamiento" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
         <button type="button" class="btn btn-secondary" form="crearCarreras"data-bs-dismiss="modal">Cerrar</button>      
       </div>
     </div>
-</form>
+
   </div>
 </div>
 
@@ -220,10 +221,6 @@ json_encode($datos);
     }
 
 
-    function editarEntrenamiento(){
-
-    }    
-  
 
    function pintarTabla(data){
    console.log(data);
@@ -303,7 +300,6 @@ json_encode($datos);
            metros.setAttribute("value",data[i]['Metros'])
           
          });
-        // descomentar para editar cuando tenga el modal
          a.setAttribute("data-bs-toggle", "modal");
          a.setAttribute("data-bs-target", "#editModal");
          a.className += "btn btn-success float-end";
@@ -321,6 +317,28 @@ json_encode($datos);
         tabla.appendChild(tbody);
       }
   }
+  function editarEntrenamiento(){
+      //cogemos lo datos del formulario
+      const data = new FormData(document.getElementById("formEditEntrenamiento"));
+      //console.log(data);
+      fetch('<?php echo RUTA_URL?>/entrenamientos/editEntrenamiento', {
+          method: "POST",
+          body: data,
+      })
+          .then((resp) => resp.json())
+          .then((data) => {
+              if (Boolean(data)){
+                  console.log(data);                        
+                  
+              } else {
+                console.log('error al borrar el registro')
+              }
+          })
+          .catch(function(error) {
+            console.log(error)
+          })
+  }
+
 
   function cleanArray(actual){
   var newArray = new Array();

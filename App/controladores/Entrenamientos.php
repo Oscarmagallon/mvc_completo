@@ -27,6 +27,12 @@ class Entrenamientos extends Controlador{
      
     }
 
+    public function editEntrenamiento(){
+        $datos = $_POST;
+        $bandera = 1;
+        $this->vistaApi($datos); 
+        
+    }
     public function crear(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {          
                  $usuarioNuevo = [
