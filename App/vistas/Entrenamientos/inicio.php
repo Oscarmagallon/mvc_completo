@@ -99,7 +99,7 @@ json_encode($datos);
           <label for="fecha">Fecha</label> <br>
           <input type="date" name="fecha" value="" id="fechaa">
           <label for="vueltas">vueltas</label>
-          <input type="number" value ="" name="vueltas"> 
+          <input type="number" value ="" id="vueltaas"name="vueltas"> 
           <label for="Titulo">Titulo</label>
           <input type="text" name="titulo" id="tituloo">
           <label for="tiempo">Tiempo</label>
@@ -231,6 +231,7 @@ json_encode($datos);
    let user = document.getElementById("usuarioss");
    let fecha = document.getElementById("fechaa");
    let cod = document.getElementById("Cod");
+   let vueltas = document.getElementById("vueltaas");
    let metros = document.getElementById("metross");
    let thead = document.createElement("thead");
    let th = document.createElement("th");
@@ -297,7 +298,8 @@ json_encode($datos);
            tiempo.setAttribute("value",data[i]['Tiempo']);
            fecha.setAttribute("value",data[i]['fecha']);
            Cod.setAttribute("value",data[i]['Cod']);
-           metros.setAttribute("value",data[i]['Metros'])
+           metros.setAttribute("value",data[i]['Metros']);
+           vueltas.setAttribute("value", data[i]['Vuelta']);
           
          });
          a.setAttribute("data-bs-toggle", "modal");
