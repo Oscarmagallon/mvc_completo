@@ -220,6 +220,19 @@ json_encode($datos);
 
     }
 
+    function getEntrenamientos(){
+    fetch(`<?php echo RUTA_URL?>/Entrenamientos/obtenerEntrenamientos`, {
+      headers: {
+          "Content-Type": "application/json"
+      },
+      credentials: 'include'
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        pintarTabla(data);
+      })
+   }
+
 
 
    function pintarTabla(data){
@@ -319,10 +332,11 @@ json_encode($datos);
         tabla.appendChild(tbody);
       }
   }
+
   function editarEntrenamiento(){
       //cogemos lo datos del formulario
       const data = new FormData(document.getElementById("formEditEntrenamiento"));
-      //console.log(data);
+      //console.log(data);g
       fetch('<?php echo RUTA_URL?>/entrenamientos/editEntrenamiento', {
           method: "POST",
           body: data,
@@ -330,7 +344,7 @@ json_encode($datos);
           .then((resp) => resp.json())
           .then((data) => {
               if (Boolean(data)){
-                  console.log(data);                        
+                  this.getEntrenamientos();                        
                   
               } else {
                 console.log('error al borrar el registro')

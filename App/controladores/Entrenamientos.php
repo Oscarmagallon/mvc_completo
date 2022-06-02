@@ -46,6 +46,12 @@ class Entrenamientos extends Controlador{
         $this->vistaApi($usuarioEdit); 
         
     }
+
+    public function obtenerEntrenamientos(){
+        $datos = $this->EntrenamientoModelo->obtenerEntrenamientos();
+        $this->vistaApi($datos);
+    }
+
     public function crear(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {          
                  $usuarioNuevo = [
