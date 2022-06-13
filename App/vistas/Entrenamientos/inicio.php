@@ -160,6 +160,8 @@ json_encode($datos);
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <li class="dropdown-item" onclick="filtrarEntrenamientos(1)">Suave</li>
                 <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
+                <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(0)">Todos</a></li>
+
               </ul>
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
@@ -209,12 +211,15 @@ json_encode($datos);
     let newArrayEntrenoss= [];
     let datoss = '<?php echo json_encode($datos); ?>';
         let datos = JSON.parse(datoss);
-        
+        if(tipo == 0){
+           pintarTabla(datos['Entrenamientos']);
+        } else{
          for (let i = 0; i < datos['Entrenamientos'].length; i++) {
                 if( datos['Entrenamientos'][i]['Cod_tipo'] == tipo){
                   newArrayEntrenos[i]=  datos['Entrenamientos'][i];
                }
          }
+        }
          newArrayEntrenoss = cleanArray(newArrayEntrenos);
        pintarTabla(newArrayEntrenoss)
 
@@ -236,7 +241,7 @@ json_encode($datos);
 
 
    function pintarTabla(data){
-   console.log(data);
+   //console.log(data);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
    let titulo = document.getElementById("tituloo");
