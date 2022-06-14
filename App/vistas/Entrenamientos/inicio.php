@@ -152,17 +152,28 @@ json_encode($datos);
 
   </div>
 </div>
-
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+          <div class="row">
+              <a class="col-1 nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
                   Filtrar por
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li class="dropdown-item" onclick="filtrarEntrenamientos(1)">Suave</li>
-                <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
-                <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(0)">Todos</a></li>
-
+              <ul class="col-1 dropdown-menu" id= "Tipo" aria-labelledby="navbarDropdownMenuLink">
+                  <li class="dropdown-item" onclick="filtrarEntrenamientos(1)">Suave</li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(0)">Todos</a></li>
               </ul>
+             
+              <a class="col-1 nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtrar por
+              </a>
+              <ul class="col-1 dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li class="dropdown-item" onclick="filtrarEntrenamientosTipo(1)">Cross</li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientosTipo(2)">Tierra</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientosTipo(3)">Pista</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientosTipo(0)">Todos</a></li>
+              </ul>
+          </div>
     <div class="table-responsive" id="divTabla">
         <table class="table table-hover" id="tabla">
 
@@ -205,6 +216,7 @@ json_encode($datos);
 				}
 			}
 		}
+ 
 
     function filtrarEntrenamientos(tipo){
     let newArrayEntrenos= [];
@@ -221,7 +233,28 @@ json_encode($datos);
          }
         }
          newArrayEntrenoss = cleanArray(newArrayEntrenos);
-       pintarTabla(newArrayEntrenoss)
+       pintarTabla(newArrayEntrenoss);
+    
+       
+
+    }
+
+    function filtrarEntrenamientosTipo(tipo){
+      let newArrayEntrenos= [];
+    let newArrayEntrenoss= [];
+    let datoss = '<?php echo json_encode($datos); ?>';
+        let datos = JSON.parse(datoss);
+        if(tipo == 0){
+           pintarTabla(datos['Entrenamientos']);
+        } else{
+         for (let i = 0; i < datos['Entrenamientos'].length; i++) {
+                if( datos['Entrenamientos'][i]['Cod_superficie'] == tipo){
+                  newArrayEntrenos[i]=  datos['Entrenamientos'][i];
+               }
+         }
+        }
+         newArrayEntrenoss = cleanArray(newArrayEntrenos);
+       pintarTabla(newArrayEntrenoss);
 
     }
 

@@ -247,7 +247,7 @@ json_encode($datos);
           tiempo.setAttribute("value",data[i]['Tiempo']);
           fecha.setAttribute("value",data[i]['Fecha']);
           Cod.setAttribute("value",data[i]['Cod']);
-          metros.setAttribute("value",data[i]['Metros'])
+          metros.setAttribute("value",data[i]['Metros']);
           
 
 
