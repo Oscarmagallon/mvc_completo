@@ -1,4 +1,4 @@
-<?php require_once RUTA_APP.'/vistas/inc/header.php' ?>
+<?php require_once RUTA_APP . '/vistas/inc/header.php' ?>
 
 <a href=".." class="btn btn-light"><i class="bi bi-chevron-double-left"></i>Volver</a>
 
@@ -38,9 +38,8 @@
             <label for="user_fnac">Fecha Nacimiento: <sup>*</sup></label>
             <input type="date" name="user_fnac" id="user_fnac" class="form-control form-control-lg" value="<?php echo $datos['usuario']->user_fnac ?>">
         </div>
-</form>
-    
+    </form>
+
 </div>
 
-<?php require_once RUTA_APP.'/vistas/inc/footer.php' ?>
-
+<?php require_once RUTA_APP . '/vistas/inc/footer.php' ?>

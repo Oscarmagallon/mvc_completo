@@ -22,4 +22,3 @@ class Atleta extends Controlador{
      
     }
 }
-?>

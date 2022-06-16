@@ -21,4 +21,3 @@ class Admin extends Controlador{
      
     }
 }
-?>

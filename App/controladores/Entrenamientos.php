@@ -71,8 +71,8 @@ class Entrenamientos extends Controlador{
                 'CodEntre' => trim($_POST['entrenador']),
 
             ];
-            $this->EntrenamientoModelo->agregarEntrenamientos($usuarioNuevo); 
-            redireccionar("/Entrenamientos");
+        $this->EntrenamientoModelo->agregarEntrenamientos($usuarioNuevo); 
+        redireccionar("/Entrenamientos");
     
         }
     }
@@ -83,4 +83,3 @@ class Entrenamientos extends Controlador{
 
     }
 }
-?>

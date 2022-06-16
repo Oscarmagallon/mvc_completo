@@ -22,4 +22,3 @@ class Entrenador extends Controlador{
      
     }
 }
-?>
