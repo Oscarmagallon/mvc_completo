@@ -274,7 +274,7 @@ json_encode($datos);
 
 
    function pintarTabla(data){
-   //console.log(data);
+   console.log(data);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
    let titulo = document.getElementById("tituloo");
@@ -378,24 +378,25 @@ json_encode($datos);
   }
 
   function ordenarMetros(){
-    console.log("hola");
-    fetch('<?php echo RUTA_URL?>/entrenamientos/ordenarMetros', {
+      //cogemos lo datos del formulario
+      const data = new FormData(document.getElementById("formEditEntrenamiento"));
+      //console.log(data);g
+      fetch('<?php echo RUTA_URL?>/entrenamientos/ordenarMetros', {
           method: "POST",
-          body: data,
+          //body: data,
       })
           .then((resp) => resp.json())
           .then((data) => {
               if (Boolean(data)){
-                  console.log(data);                        
+                  pintarTabla(data);                        
                   
               } else {
                 console.log('error al borrar el registro')
               }
           })
           .catch(function(error) {
-            console.log("fallo")
-   
-  }
+            console.log(error)
+          })
   }
 
   function editarEntrenamiento(){
