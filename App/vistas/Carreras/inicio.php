@@ -25,8 +25,8 @@ json_encode($datos);
       </div>
       <div class="modal-body">
         <form action="Carreras/crear" method="POST">
-          <label for="fecha">Fecha</label>
-          <input type="date"name="fecha" id="fechaedit">
+          <label for="fechaa">Fecha</label>
+          <input type="date"name="fechaa" id="fechaedit">
           <label for="Titulo">Titulo</label>
           <input type="text" name="titulo" id="tituloedit">
           <p>Superficie</p>
@@ -121,6 +121,7 @@ json_encode($datos);
                 <li class="dropdown-item" onclick="filtrarSuperficie(1)">Cross</li>
                 <li><a class="dropdown-item"  onclick="filtrarSuperficie(2)">Tierra</a></li>
                 <li><a class="dropdown-item"  onclick="filtrarSuperficie(3)">Pista</a></li>
+                <li><a class="dropdown-item"  onclick="filtrarSuperficie(0)">Todos</a></li>
               </ul>
 
     <div class="table-responsive" id="divTabla">
@@ -170,6 +171,9 @@ json_encode($datos);
     let newArrayEntrenoss= [];
     let datoss = '<?php echo json_encode($datos); ?>';
         let datos = JSON.parse(datoss);
+        if(tipo == 0){
+           pintarTablaModi(datos['Carreras']);
+        }
          for (let i = 0; i < datos['Carreras'].length; i++) {
                 if( datos['Carreras'][i]['Superficie_Cod'] == tipo){
                   newArrayEntrenos[i] =  datos['Carreras'][i];
@@ -239,7 +243,9 @@ json_encode($datos);
         td.appendChild(document.createTextNode(data[i]['Titulo']));
         td1.appendChild(document.createTextNode(data[i]['Metros']));
         td2.appendChild(document.createTextNode(data[i]['Tiempo']));
-        td3.appendChild(document.createTextNode("Ritmo"));
+        minutos = pasarHorasMinutos(data[i]['Tiempo']);
+        km = metrosKm(data[i]['Metros']);
+        td3.appendChild(document.createTextNode(km/minutos + ' km/min'));
         td4.appendChild(document.createTextNode(data[i]['Tipo']));
         a.appendChild(document.createTextNode("Edit"));
         a.addEventListener("click", function(){
@@ -278,6 +284,28 @@ json_encode($datos);
 
 
    }
+   function pasarHorasMinutos(tiempo){
+    horas= parseInt(tiempo);
+    min = parseInt(tiempo.substr(3,2));
+    segundos = parseInt(tiempo.substr(6,2));
+    horasMin = horas*60;
+    segundosMin = segundos /60;
+    console.log(tiempo);
+
+    minutos = horasMin + segundosMin + min;
+    return minutos;
+
+   
+    
+   
+  }
+
+  function metrosKm(metros){
+    km = metros/1000;
+
+    return km;
+  }
+
 
    function editCarrera(){
       //cogemos lo datos del formulario
@@ -289,7 +317,7 @@ json_encode($datos);
           .then((resp) => resp.json())
           .then((data) => {
               if (Boolean(data)){
-                  this.getCarreras()                        
+                this.getCarreras()                        
                   
               } else {
                 console.log('error al borrar el registro')

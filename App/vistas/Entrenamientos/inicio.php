@@ -339,7 +339,7 @@ json_encode($datos);
         td3.appendChild(document.createTextNode(data[i]['Tiempo']));
         minutos = pasarHorasMinutos(data[i]['Tiempo']);
         km = metrosKm(data[i]['Metros']);
-        td4.appendChild(document.createTextNode(minutos/km + ' km/min'));
+        td4.appendChild(document.createTextNode(km/minutos + ' km/min'));
         td5.appendChild(document.createTextNode(data[i]["Tipo"]));
         td6.appendChild(document.createTextNode(data[i]["Tipo_entrenamiento"]));
         button.appendChild(document.createTextNode("X"));
@@ -424,10 +424,16 @@ json_encode($datos);
   function pasarHorasMinutos(tiempo){
     horas= parseInt(tiempo);
     min = parseInt(tiempo.substr(3,2));
-    minutos = horas*60;
-    minn = minutos + min;
+    segundos = parseInt(tiempo.substr(6,2));
+    horasMin = horas*60;
+    segundosMin = segundos /60;
+
+    minutos = horasMin + segundosMin + min;
+    return minutos;
+
+   
     
-    return minn;
+   
   }
 
   function metrosKm(metros){
