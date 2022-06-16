@@ -69,6 +69,11 @@
 
     }
 
+    public function obetenerMetros(){
+        $this->db->query("SELECT * FROM `entrenamiento` order by Metros DESC");
+        return $this->db->registros();
+    }
+    
     public function eliminar($id){
         
         $this->db->query("DELETE from entrenamiento where Cod = $id");

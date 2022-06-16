@@ -296,6 +296,10 @@ json_encode($datos);
    th.appendChild(document.createTextNode("Nombre"));
    th1.appendChild(document.createTextNode("Vuelta"));
    th2.appendChild(document.createTextNode("Metros"));
+   th2.addEventListener("click", function(){
+           ordenarMetros();
+         
+          });
    th3.appendChild(document.createTextNode("Tiempo"));
    th4.appendChild(document.createTextNode("Ritmo"));
    th5.appendChild(document.createTextNode("Superficie"));
@@ -333,7 +337,9 @@ json_encode($datos);
         td1.appendChild(document.createTextNode(data[i]['Vuelta']));
         td2.appendChild(document.createTextNode(data[i]['Metros']));
         td3.appendChild(document.createTextNode(data[i]['Tiempo']));
-        td4.appendChild(document.createTextNode("Ritmo"));
+        minutos = pasarHorasMinutos(data[i]['Tiempo']);
+        km = metrosKm(data[i]['Metros']);
+        td4.appendChild(document.createTextNode(minutos/km + ' km/min'));
         td5.appendChild(document.createTextNode(data[i]["Tipo"]));
         td6.appendChild(document.createTextNode(data[i]["Tipo_entrenamiento"]));
         button.appendChild(document.createTextNode("X"));
@@ -371,6 +377,27 @@ json_encode($datos);
       }
   }
 
+  function ordenarMetros(){
+    console.log("hola");
+    fetch('<?php echo RUTA_URL?>/entrenamientos/ordenarMetros', {
+          method: "POST",
+          body: data,
+      })
+          .then((resp) => resp.json())
+          .then((data) => {
+              if (Boolean(data)){
+                  console.log(data);                        
+                  
+              } else {
+                console.log('error al borrar el registro')
+              }
+          })
+          .catch(function(error) {
+            console.log("fallo")
+   
+  }
+  }
+
   function editarEntrenamiento(){
       //cogemos lo datos del formulario
       const data = new FormData(document.getElementById("formEditEntrenamiento"));
@@ -391,6 +418,21 @@ json_encode($datos);
           .catch(function(error) {
             console.log(error)
           })
+  }
+
+  function pasarHorasMinutos(tiempo){
+    horas= parseInt(tiempo);
+    min = parseInt(tiempo.substr(3,2));
+    minutos = horas*60;
+    minn = minutos + min;
+    
+    return minn;
+  }
+
+  function metrosKm(metros){
+    km = metros/1000;
+
+    return km;
   }
 
 
