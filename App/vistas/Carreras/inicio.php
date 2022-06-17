@@ -22,13 +22,13 @@ json_encode($datos);
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> 
       <div class="modal-body">
         <form action="Carreras/crear" method="POST">
-          <label for="fecha">Fecha</label>
-          <input type="date"name="fecha" id="fechaedit">
+          <label for="fechaa">Fecha</label>
+          <input type="date"name="fechaaedit" id="fechaedit">
           <label for="Titulo">Titulo</label>
-          <input type="text" name="titulo" id="tituloedit">
+          <input type="text" name="titulo" min=() id="tituloedit">
           <p>Superficie</p>
             <input type="radio" id="Cross" name ="superficie" value="1">
             <label for="Cross">Cross</label>
@@ -59,12 +59,13 @@ json_encode($datos);
   </div>
 </div>
 
+
 <div>
     <div class="container-fluid px-2">
 
           
     </div>
-    <div class="modal fade" id="modalAdd" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsuarioLabel" aria-hidden="true">
+    <div class="modal fade" id="modalEdit" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalEditUsuarioLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -111,7 +112,7 @@ json_encode($datos);
   </div>
 </div>
 <?php
-  print_r($datos);
+ // print_r($datos);
 ?>
  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
@@ -120,6 +121,7 @@ json_encode($datos);
                 <li class="dropdown-item" onclick="filtrarSuperficie(1)">Cross</li>
                 <li><a class="dropdown-item"  onclick="filtrarSuperficie(2)">Tierra</a></li>
                 <li><a class="dropdown-item"  onclick="filtrarSuperficie(3)">Pista</a></li>
+                <li><a class="dropdown-item"  onclick="filtrarSuperficie(0)">Todos</a></li>
               </ul>
 
     <div class="table-responsive" id="divTabla">
@@ -128,6 +130,10 @@ json_encode($datos);
        >
     </html>
     <script>
+
+
+   var hoy = new Date().toISOString().split('T')[0];
+   document.getElementById("fechaedit").setAttribute('min', hoy);
      
 
       if(document.getElementById("btnModal")){
@@ -169,6 +175,9 @@ json_encode($datos);
     let newArrayEntrenoss= [];
     let datoss = '<?php echo json_encode($datos); ?>';
         let datos = JSON.parse(datoss);
+        if(tipo == 0){
+           pintarTablaModi(datos['Carreras']);
+        }
          for (let i = 0; i < datos['Carreras'].length; i++) {
                 if( datos['Carreras'][i]['Superficie_Cod'] == tipo){
                   newArrayEntrenos[i] =  datos['Carreras'][i];
@@ -178,7 +187,7 @@ json_encode($datos);
          
          pintarTablaModi(newArrayEntrenoss);
     }
-//borrar cuando se pueda para depurar codigo
+//borrar cuando se pueda :)
     function cleanArray(actual){
   var newArray = new Array();
   for( var i = 0, j = actual.length; i < j; i++ ){
@@ -189,7 +198,6 @@ json_encode($datos);
   return newArray;
 }
    function pintarTablaModi(data){
-     console.log(data);
     var tabla = document.getElementById("tabla");
     tabla.innerHTML = "";
     let titulo = document.getElementById("tituloo");
@@ -197,7 +205,7 @@ json_encode($datos);
     let user = document.getElementById("usuarios");
     let fecha = document.getElementById("fechaa");
     let cod = document.getElementById("Cod");
-    let metros = document.getElementById("metross")
+    let metros = document.getElementById("metross");
 
     let thead = document.createElement("thead");
     let th = document.createElement("th");
@@ -239,7 +247,9 @@ json_encode($datos);
         td.appendChild(document.createTextNode(data[i]['Titulo']));
         td1.appendChild(document.createTextNode(data[i]['Metros']));
         td2.appendChild(document.createTextNode(data[i]['Tiempo']));
-        td3.appendChild(document.createTextNode("Ritmo"));
+        minutos = pasarHorasMinutos(data[i]['Tiempo']);
+        km = metrosKm(data[i]['Metros']);
+        td3.appendChild(document.createTextNode(km/minutos + ' km/min'));
         td4.appendChild(document.createTextNode(data[i]['Tipo']));
         a.appendChild(document.createTextNode("Edit"));
         a.addEventListener("click", function(){
@@ -247,19 +257,19 @@ json_encode($datos);
           tiempo.setAttribute("value",data[i]['Tiempo']);
           fecha.setAttribute("value",data[i]['Fecha']);
           Cod.setAttribute("value",data[i]['Cod']);
-          metros.setAttribute("value",data[i]['Metros'])
+          metros.setAttribute("value",data[i]['Metros']);
           
 
 
         });
         a.setAttribute("data-bs-toggle", "modal");
-        a.setAttribute("data-bs-target", "#modalAdd");
+        a.setAttribute("data-bs-target", "#modalEdit");
         a.className += "btn btn-success float-end";
         button.appendChild(document.createTextNode("X"));
         button.addEventListener("click", function(){
-            resultado = confirm('¿Realmente desea eliminar:'+data[i]['Cod']+'? hola');
+            resultado = confirm('¿Realmente desea eliminar?');
             if(resultado){
-              delEntrenamiento(data[i]['Cod'])
+              delCarrera(data[i]['Cod'])
             }
         });
         td5.appendChild(a);
@@ -278,6 +288,28 @@ json_encode($datos);
 
 
    }
+   function pasarHorasMinutos(tiempo){
+    horas= parseInt(tiempo);
+    min = parseInt(tiempo.substr(3,2));
+    segundos = parseInt(tiempo.substr(6,2));
+    horasMin = horas*60;
+    segundosMin = segundos /60;
+
+
+    minutos = horasMin + segundosMin + min;
+    return minutos;
+
+   
+    
+   
+  }
+
+  function metrosKm(metros){
+    km = metros/1000;
+
+    return km;
+  }
+
 
    function editCarrera(){
       //cogemos lo datos del formulario
@@ -289,7 +321,7 @@ json_encode($datos);
           .then((resp) => resp.json())
           .then((data) => {
               if (Boolean(data)){
-                  this.getCarreras()                        
+                this.getCarreras()                        
                   
               } else {
                 console.log('error al borrar el registro')
@@ -300,13 +332,11 @@ json_encode($datos);
           })
   }
 
-  function delEntrenamiento(cod){
-      // console.log(cod)
-      // cogemos lo datos del formulario
+  function delCarrera(cod){
+
       const data = new FormData()
       data.append('cod', cod)
- 
-// console.log(data)
+
       fetch('<?php echo RUTA_URL?>/carreras/delCarrera', {
           method: "POST",
           body: data,
@@ -334,7 +364,7 @@ json_encode($datos);
     })
       .then((resp) => resp.json())
       .then((data) => {
-        //console.log(data);
+ 
         pintarTablaModi(data);
       })
    }
@@ -342,6 +372,8 @@ json_encode($datos);
    var datos = <?php echo json_encode($datos["Carreras"]);?>;
 
    window.onload = pintarTablaModi(datos); 
+
+
 
 
     </script>

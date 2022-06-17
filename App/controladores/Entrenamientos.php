@@ -27,6 +27,36 @@ class Entrenamientos extends Controlador{
      
     }
 
+    public function editEntrenamiento(){
+        $usuarioEdit = [
+            'Fecha' => trim($_POST["fecha"]),
+            'Vueltas' => trim($_POST["vueltas"]),
+            'Titulo' => trim($_POST["titulo"]),
+            'Tiempo' => trim($_POST["tiempo"]),
+            'superficie' => trim($_POST['superficie']),
+            'Metros' => trim($_POST['metros']),
+            'Tipo' => trim($_POST["Tipo"]),
+            'CodUser' => trim($_POST['usuarios']),
+            'CodEntre' => trim($_POST['entrenador']),
+            'Cod' => trim($_POST['Cod'])
+
+        ];
+        $bandera = 1;
+        $this->EntrenamientoModelo->editarEntrenamientos($usuarioEdit);
+        $this->vistaApi($usuarioEdit); 
+        
+    }
+
+    public function ordenarMetros(){
+        $datos = $this->EntrenamientoModelo->obetenerMetros();
+        $this->vistaApi($datos);
+    }
+
+    public function obtenerEntrenamientos(){
+        $datos = $this->EntrenamientoModelo->obtenerEntrenamientos();
+        $this->vistaApi($datos);
+    }
+
     public function crear(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {          
                  $usuarioNuevo = [

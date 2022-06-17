@@ -32,7 +32,7 @@ class Carreras extends Controlador{
     public function crear(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {      
                 $carreraNueva = [
-                'Fecha' => trim($_POST["fecha"]),
+                'Fecha' => trim($_POST["fechaaedit"]),
                 'Titulo' => trim($_POST["titulo"]),
                 'Tiempo' => trim($_POST["tiempo"]),
                 'superficie' => trim($_POST['superficie']),
@@ -68,13 +68,10 @@ class Carreras extends Controlador{
             'Metros' => trim($_POST['metross']),
             'Cod' => trim($_POST['Cod'])
         ]; 
+        
       
          $datos = $this->CarreraModelo->modificarCarrera($carreraEditada);
-        if(empty($datos)){
-            $bandera = 0;
-        }
-            $bandera = 1; 
-        $this->vistaApi($bandera); 
+        $this->vistaApi($carreraEditada); 
         
 
         
