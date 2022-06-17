@@ -306,19 +306,19 @@ json_encode($datos);
    th1.appendChild(document.createTextNode("Vuelta"));
    th1.addEventListener("click", function(){
      m = "Vuelta";
-           ordenarMetros(m);
+     ordenar(m);
          
           });
    th2.appendChild(document.createTextNode("Metros"));
    th2.addEventListener("click", function(){
      m = "Metros"
-           ordenarMetros(m);
+     ordenar(m);
          
           });
    th3.appendChild(document.createTextNode("Tiempo"));
    th3.addEventListener("click", function(){
      m = "Tiempo"
-           ordenarMetros(m);
+     ordenar(m);
          
           });
    th4.appendChild(document.createTextNode("Ritmo"));
@@ -397,7 +397,7 @@ json_encode($datos);
       }
   }
 
-  function ordenarMetros(tipo){
+  function ordenar(tipo){
       //cogemos lo datos del formulario
       const data = tipo;
 
