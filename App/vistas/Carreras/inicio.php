@@ -22,13 +22,13 @@ json_encode($datos);
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> 
       <div class="modal-body">
         <form action="Carreras/crear" method="POST">
           <label for="fechaa">Fecha</label>
-          <input type="date"name="fechaa" id="fechaedit">
+          <input type="date"name="fechaaedit" id="fechaedit">
           <label for="Titulo">Titulo</label>
-          <input type="text" name="titulo" id="tituloedit">
+          <input type="text" name="titulo" min=() id="tituloedit">
           <p>Superficie</p>
             <input type="radio" id="Cross" name ="superficie" value="1">
             <label for="Cross">Cross</label>
@@ -112,7 +112,7 @@ json_encode($datos);
   </div>
 </div>
 <?php
-  print_r($datos);
+ // print_r($datos);
 ?>
  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
@@ -130,6 +130,10 @@ json_encode($datos);
        >
     </html>
     <script>
+
+
+   var hoy = new Date().toISOString().split('T')[0];
+   document.getElementById("fechaedit").setAttribute('min', hoy);
      
 
       if(document.getElementById("btnModal")){
@@ -263,7 +267,7 @@ json_encode($datos);
         a.className += "btn btn-success float-end";
         button.appendChild(document.createTextNode("X"));
         button.addEventListener("click", function(){
-            resultado = confirm('¿Realmente desea eliminar:'+data[i]['Cod']+'? hola');
+            resultado = confirm('¿Realmente desea eliminar?');
             if(resultado){
               delCarrera(data[i]['Cod'])
             }
@@ -290,7 +294,7 @@ json_encode($datos);
     segundos = parseInt(tiempo.substr(6,2));
     horasMin = horas*60;
     segundosMin = segundos /60;
-    console.log(tiempo);
+
 
     minutos = horasMin + segundosMin + min;
     return minutos;
@@ -329,12 +333,10 @@ json_encode($datos);
   }
 
   function delCarrera(cod){
-      // console.log(cod)
-      // cogemos lo datos del formulario
+
       const data = new FormData()
       data.append('cod', cod)
- 
-// console.log(data)
+
       fetch('<?php echo RUTA_URL?>/carreras/delCarrera', {
           method: "POST",
           body: data,
@@ -362,7 +364,7 @@ json_encode($datos);
     })
       .then((resp) => resp.json())
       .then((data) => {
-        //console.log(data);
+ 
         pintarTablaModi(data);
       })
    }
@@ -370,6 +372,8 @@ json_encode($datos);
    var datos = <?php echo json_encode($datos["Carreras"]);?>;
 
    window.onload = pintarTablaModi(datos); 
+
+
 
 
     </script>

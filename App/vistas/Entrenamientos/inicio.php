@@ -160,6 +160,12 @@ json_encode($datos);
               <ul class="col-1 dropdown-menu" id= "Tipo" aria-labelledby="navbarDropdownMenuLink">
                   <li class="dropdown-item" onclick="filtrarEntrenamientos(1)">Suave</li>
                   <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(2)">Fuerte</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(3)">Calentamiento</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(4)">Fartlek</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(5)">Medio</a></li>
+                  <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(6)">Series</a></li>
+
+
                   <li><a class="dropdown-item"  onclick="filtrarEntrenamientos(0)">Todos</a></li>
               </ul>
              
@@ -178,10 +184,12 @@ json_encode($datos);
         <table class="table table-hover" id="tabla">
 
             <?php
-              print_r($datos["Entrenamientos"]);
+             // print_r($datos["Entrenamientos"]);
             ?>
     </html>
     <script>
+         var hoy = new Date().toISOString().split('T')[0];
+   document.getElementById("fecha").setAttribute('min', hoy);
      
 
       if(document.getElementById("btnModal")){
@@ -274,7 +282,6 @@ json_encode($datos);
 
 
    function pintarTabla(data){
-   console.log(data);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
    let titulo = document.getElementById("tituloo");
@@ -380,7 +387,7 @@ json_encode($datos);
   function ordenarMetros(){
       //cogemos lo datos del formulario
       const data = new FormData(document.getElementById("formEditEntrenamiento"));
-      //console.log(data);g
+
       fetch('<?php echo RUTA_URL?>/entrenamientos/ordenarMetros', {
           method: "POST",
           //body: data,
@@ -402,7 +409,7 @@ json_encode($datos);
   function editarEntrenamiento(){
       //cogemos lo datos del formulario
       const data = new FormData(document.getElementById("formEditEntrenamiento"));
-      //console.log(data);g
+   
       fetch('<?php echo RUTA_URL?>/entrenamientos/editEntrenamiento', {
           method: "POST",
           body: data,

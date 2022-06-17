@@ -32,7 +32,7 @@ class Carreras extends Controlador{
     public function crear(){
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {      
                 $carreraNueva = [
-                'Fecha' => trim($_POST["fecha"]),
+                'Fecha' => trim($_POST["fechaaedit"]),
                 'Titulo' => trim($_POST["titulo"]),
                 'Tiempo' => trim($_POST["tiempo"]),
                 'superficie' => trim($_POST['superficie']),
