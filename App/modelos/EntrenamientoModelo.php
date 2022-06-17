@@ -69,9 +69,10 @@
 
     }
 
-    public function obetenerMetros(){
-        $this->db->query("SELECT e.*,s.Cod as Cod_superficie,s.Tipo,t.Tipo_entrenamiento,t.Cod as Cod_tipo FROM entrenamiento e INNER JOIN superficie s on e.superficie_Cod = s.Cod INNER JOIN tipo_entrenamiento t on e.Tipo_entrenamiento_Cod = t.Cod order by Metros desc;");
+    public function obetenerMetros($tipo){
+        $this->db->query("SELECT e.*,s.Cod as Cod_superficie,s.Tipo,t.Tipo_entrenamiento,t.Cod as Cod_tipo FROM entrenamiento e INNER JOIN superficie s on e.superficie_Cod = s.Cod INNER JOIN tipo_entrenamiento t on e.Tipo_entrenamiento_Cod = t.Cod order by $tipo desc;");
         return $this->db->registros();
+
     }
     
     public function eliminar($id){

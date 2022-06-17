@@ -47,8 +47,9 @@ class Entrenamientos extends Controlador{
         
     }
 
-    public function ordenarMetros(){
-        $datos = $this->EntrenamientoModelo->obetenerMetros();
+    public function ordenarMetros($tipo){
+        $tipoo = $tipo;
+        $datos = $this->EntrenamientoModelo->obetenerMetros($tipoo);
         $this->vistaApi($datos);
     }
 

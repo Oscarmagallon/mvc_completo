@@ -275,6 +275,7 @@ json_encode($datos);
     })
       .then((resp) => resp.json())
       .then((data) => {
+
         pintarTabla(data);
       })
    }
@@ -282,6 +283,7 @@ json_encode($datos);
 
 
    function pintarTabla(data){
+     console.log(data);
    var tabla = document.getElementById("tabla");
    tabla.innerHTML = "";
    let titulo = document.getElementById("tituloo");
@@ -302,12 +304,23 @@ json_encode($datos);
    let th7 = document.createElement("th");
    th.appendChild(document.createTextNode("Nombre"));
    th1.appendChild(document.createTextNode("Vuelta"));
+   th1.addEventListener("click", function(){
+     m = "Vuelta";
+           ordenarMetros(m);
+         
+          });
    th2.appendChild(document.createTextNode("Metros"));
    th2.addEventListener("click", function(){
-           ordenarMetros();
+     m = "Metros"
+           ordenarMetros(m);
          
           });
    th3.appendChild(document.createTextNode("Tiempo"));
+   th3.addEventListener("click", function(){
+     m = "Tiempo"
+           ordenarMetros(m);
+         
+          });
    th4.appendChild(document.createTextNode("Ritmo"));
    th5.appendChild(document.createTextNode("Superficie"));
    th6.appendChild(document.createTextNode("Tipo Entrenamientos"));
@@ -384,18 +397,19 @@ json_encode($datos);
       }
   }
 
-  function ordenarMetros(){
+  function ordenarMetros(tipo){
       //cogemos lo datos del formulario
-      const data = new FormData(document.getElementById("formEditEntrenamiento"));
+      const data = tipo;
 
-      fetch('<?php echo RUTA_URL?>/entrenamientos/ordenarMetros', {
+      fetch('<?php echo RUTA_URL?>/entrenamientos/ordenarMetros/'+tipo, {
           method: "POST",
-          //body: data,
+          body: data,
       })
           .then((resp) => resp.json())
           .then((data) => {
-              if (Boolean(data)){
-                  pintarTabla(data);                        
+              if (Boolean(data)){  
+                  pintarTabla(data);
+                                       
                   
               } else {
                 console.log('error al borrar el registro')
